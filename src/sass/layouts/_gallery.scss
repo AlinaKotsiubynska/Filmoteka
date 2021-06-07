@@ -4,19 +4,19 @@
   display: grid;
   gap: 20px;
 }
-.card-picture {
+.gallery-card-picture {
   display: block;
   border-radius: 5px;
   overflow: hidden;
 }
-.card-img {
+.gallery-card-img {
   width: 100%;
   height: auto;
 }
-.card-info {
+.gallery-card-info {
   padding: 10px 0 0 1px;
 }
-.card-title {
+.gallery-card-title {
   margin-bottom: 5px;
   font-weight: 500;
   font-size: 12px;
@@ -24,7 +24,7 @@
   text-transform: uppercase;
   color: #000000;
 }
-.card-descr {
+.gallery-card-descr {
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
@@ -41,6 +41,12 @@
     background-color: #ff6b08;
     border-radius: 5px;
   }
+}
+.gallery-card-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // align-items: flex-start;
 }
 @media screen and (min-width: 768px) {
   .gallery-list {
