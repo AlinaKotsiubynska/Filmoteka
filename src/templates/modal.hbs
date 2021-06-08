@@ -1,9 +1,10 @@
 <div class="backdrop is-hidden">
-    {{#each this}}
+    {{!-- {{#each this}} --}}
     <div class="modal-container">
-        <button type="button" class="modal-btn-close">×</button>
+        <button type="button" class="modal-btn-close">X
+        </button>
         <div class="modal-image-wrapper">
-            <img class="modal-img" src={{backdrop_path}} alt={{original_title}}>
+            <img class="modal-img" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt={{original_title}}>
         </div>
         <div class="left-side-modal">
             <div class="modal-description">
@@ -23,7 +24,7 @@
                         <p class="modal-description-value">{{original_title}}</p>
                     <li class="modal-description-item">
                         <p class="modal-description-categories">Genre</p>
-                        <p class="modal-description-value">{{genres.name}}</p>
+                        <p class="modal-description-value">{{#each genre}}{{this}} {{/each}}</p>
                     </li>
                 </ul>
                 <span class="modal-description-about">About</span>
@@ -36,5 +37,5 @@
         </div>
     </div>
 
-    {{/each }}
+    {{!-- {{/each }} --}}
 </div>
