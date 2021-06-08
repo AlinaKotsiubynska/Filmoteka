@@ -1,0 +1,42 @@
+export default [
+  {
+    id: 1,
+    poster_path: 'https://i.pinimg.com/originals/4b/ba/6f/4bba6f4d487a8029817f63ff9101911d.jpg',
+    original_title: 'my js-road',
+    genre: 'vestern',
+    release_date: 2020,
+    popularity: 10,
+  },
+  {
+    id: 2,
+    poster_path: 'https://i.pinimg.com/originals/4b/ba/6f/4bba6f4d487a8029817f63ff9101911d.jpg',
+    original_title: 'my js-road',
+    genre: 'vestern',
+    release_date: 2020,
+    popularity: 10,
+  },
+  {
+    id: 3,
+    poster_path: 'https://i.pinimg.com/originals/4b/ba/6f/4bba6f4d487a8029817f63ff9101911d.jpg',
+    original_title: 'my js-road',
+    genre: 'vestern',
+    release_date: 2020,
+    popularity: 10,
+  },
+  {
+    id: 4,
+    poster_path: 'https://i.pinimg.com/originals/4b/ba/6f/4bba6f4d487a8029817f63ff9101911d.jpg',
+    original_title: 'my js-road',
+    genre: 'vestern',
+    release_date: 2020,
+    popularity: 10,
+  },
+  {
+    id: 5,
+    poster_path: 'https://i.pinimg.com/originals/4b/ba/6f/4bba6f4d487a8029817f63ff9101911d.jpg',
+    original_title: 'my js-road',
+    genre: 'vestern',
+    release_date: 2020,
+    popularity: 10,
+  },
+];
