@@ -19,7 +19,7 @@
   height: 30px;
 }
 
-.modal {
+.modal-container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -41,7 +41,7 @@ img {
 }
 
 @media screen and (min-width: 768px) {
-  .modal {
+  .modal-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
@@ -59,7 +59,7 @@ img {
 }
 
 @media screen and (min-width: 1024px) {
-  .modal {
+  .modal-container {
     width: 882px;
     padding: 50px 30px 40px;
   }
