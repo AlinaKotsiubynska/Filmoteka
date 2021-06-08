@@ -11,7 +11,7 @@
   pointer-events: none;
 }
 
-.btn--close {
+.modal-btn-close {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -32,11 +32,11 @@
   padding: 48px 20px;
 }
 
-img {
+.modal-img {
   height: auto;
 }
 
-.image-wrapper {
+.modal-image-wrapper {
   margin-bottom: 30px;
 }
 
@@ -51,7 +51,7 @@ img {
     padding: 42px 28px;
   }
 
-  .image-wrapper {
+  .modal-image-wrapper {
     width: 100%;
     height: auto;
     margin-right: 32px;
@@ -64,20 +64,20 @@ img {
     padding: 50px 30px 40px;
   }
 
-  .description-categories {
+  .modal-description-categories {
     margin-right: 85px;
   }
 
-  .description-title {
+  .modal-description-title {
     font-size: 30px;
   }
 }
 
-.description-list {
+.modal-description-list {
   margin-bottom: 20px;
 }
 
-.description-item {
+.modal-description-item {
   display: flex;
   margin-bottom: 10px;
 
@@ -86,7 +86,7 @@ img {
   }
 }
 
-.description-title {
+.modal-description-title {
   margin-bottom: 20px;
 
   font-weight: 500;
@@ -94,7 +94,7 @@ img {
   line-height: 35px;
 }
 
-.description-categories {
+.modal-description-categories {
   width: 70px;
   margin-right: 28px;
 
@@ -106,7 +106,7 @@ img {
   color: #8c8c8c;
 }
 
-.description-value {
+.modal-description-value {
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -115,7 +115,7 @@ img {
   color: #000000;
 }
 
-.description-about {
+.modal-description-about {
   display: block;
   margin-bottom: 10px;
 
@@ -123,7 +123,7 @@ img {
   font-size: 12px;
 }
 
-.description-text {
+.modal-description-text {
   margin-bottom: 20px;
 
   font-weight: 500;
@@ -131,7 +131,7 @@ img {
   line-height: 20px;
 }
 
-.button {
+.modal-button {
   width: 112px;
   display: block;
 
@@ -158,11 +158,11 @@ img {
   padding: 14px 8px;
 }
 
-.button-container {
+.modal-button-container {
   display: flex;
 }
 
-.span {
+.modal-span {
   display: inline-block;
   width: 25px;
   text-align: center;

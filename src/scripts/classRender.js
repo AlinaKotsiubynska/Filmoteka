@@ -29,18 +29,15 @@ class RenderData {
 const RenderGallery = new RenderData(galleryListTemp, '.js-gallery-container');
 RenderGallery.render(testObject);
 
-const renderModal = new RenderData(modalTemp, '.modal-wrapper');
-renderModal.render(testObject);
 
 // хендлер висит на каждой item. Data - массив объектов, всех фильмов на страничке.
 const onItemClick = (event, data) => {
   console.log(event.currentTarget.dataset.id); //каждая item уникальна и имеет свой айдишник!
   console.log(data); // Тут массив всех объектов - нужный ищи по dataset
   //open modal
+}
 
-  const a = event.currentTarget.dataset.id;
-  const backdrop = document.querySelector('.backdrop');
-  backdrop.classList.remove('is-hidden')
 
- 
-};
+
+
+

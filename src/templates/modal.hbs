@@ -1,37 +1,40 @@
 <div class="backdrop is-hidden">
+    {{#each this}}
     <div class="modal-container">
-        <button type="button" class="btn--close" data-close-modal>×</button>
-        <div class="image-wrapper">
-            <img class="modal-img" src="{{backdrop_path}}" alt='{{original_title}}'>
+        <button type="button" class="modal-btn-close">×</button>
+        <div class="modal-image-wrapper">
+            <img class="modal-img" src={{backdrop_path}} alt={{original_title}}>
         </div>
         <div class="left-side-modal">
-            <div class="description">
-                <h2 class="description-title">{{original_title}}</h2>
-                <ul class="description-list">
-                    <li class="description-item">
-                        <p class="description-categories">Vote / Votes</p>
-                        <p class="description-value"><span class="span">{{vote_average}}</span> / {{vote_count}}</p>
+            <div class="modal-description">
+                <h2 class="modal-description-title">{{original_title}}</h2>
+                <ul class="modal-description-list">
+                    <li class="modal-description-item">
+                        <p class="modal-description-categories">Vote / Votes</p>
+                        <p class="modal-description-value"><span class="modal-span">{{vote_average}}</span> /
+                            {{vote_count}}</p>
                     </li>
-                    <li class="description-item">
-                        <p class="description-categories">Popularity</p>
-                        <p class="description-value">{{popularity}}</p>
+                    <li class="modal-description-item">
+                        <p class="modal-description-categories">Popularity</p>
+                        <p class="modal-description-value">{{popularity}}</p>
                     </li>
-                    <li class="description-item">
-                        <p class="description-categories">Original Title</p>
-                        <p class="description-value">{{original_title}}</p>
-                    </li>
-                    <li class="description-item">
-                        <p class="description-categories">Genre</p>
-                        <p class="description-value">{{genres.name}}</p>
+                    <li class="modal-description-item">
+                        <p class="modal-description-categories">Original Title</p>
+                        <p class="modal-description-value">{{original_title}}</p>
+                    <li class="modal-description-item">
+                        <p class="modal-description-categories">Genre</p>
+                        <p class="modal-description-value">{{genres.name}}</p>
                     </li>
                 </ul>
-                <span class="description-about">About</span>
-                <p class="description-text">{{overview}}</p>
+                <span class="modal-description-about">About</span>
+                <p class="modal-description-text">{{overview}}</p>
             </div>
-            <div class="button-container">
-                <button class="button btn-add-watch" type="button">add to Watched</button>
-                <button class="button btn-add-queue" type="button">add to queue</button>
+            <div class="modal-button-container">
+                <button class="modal-button btn-add-watch" type="button">add to Watched</button>
+                <button class="modal-button btn-add-queue" type="button">add to queue</button>
             </div>
         </div>
     </div>
+
+    {{/each }}
 </div>
