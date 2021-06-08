@@ -1,0 +1,171 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn--close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.modal-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: rgb(255, 182, 243);
+
+  min-width: 280px;
+  min-height: 958px;
+  padding: 48px 20px;
+}
+
+img {
+  height: auto;
+}
+
+.image-wrapper {
+  margin-bottom: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .modal-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+
+    width: 618px;
+    min-height: 562px;
+    padding: 42px 28px;
+  }
+
+  .image-wrapper {
+    width: 100%;
+    height: auto;
+    margin-right: 32px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .modal-container {
+    width: 882px;
+    padding: 50px 30px 40px;
+  }
+
+  .description-categories {
+    margin-right: 85px;
+  }
+
+  .description-title {
+    font-size: 30px;
+  }
+}
+
+.description-list {
+  margin-bottom: 20px;
+}
+
+.description-item {
+  display: flex;
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.description-title {
+  margin-bottom: 20px;
+
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 35px;
+}
+
+.description-categories {
+  width: 70px;
+  margin-right: 28px;
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #8c8c8c;
+}
+
+.description-value {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #000000;
+}
+
+.description-about {
+  display: block;
+  margin-bottom: 10px;
+
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.description-text {
+  margin-bottom: 20px;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.button {
+  width: 112px;
+  display: block;
+
+  border-radius: 5px;
+  border: 1px solid #000000;
+  background-color: transparent;
+
+  text-transform: uppercase;
+  font-size: 12px;
+
+  &:hover {
+    border: none;
+    background-color: #ff6b01;
+    color: #ffffff;
+  }
+}
+
+.btn-add-watch {
+  margin-right: 10px;
+  padding: 3px 8px;
+}
+
+.btn-add-queue {
+  padding: 14px 8px;
+}
+
+.button-container {
+  display: flex;
+}
+
+.span {
+  display: inline-block;
+  width: 25px;
+  text-align: center;
+  background-color: #ff6b01;
+  border-radius: 3px;
+}
