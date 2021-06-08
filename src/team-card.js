@@ -1,4 +1,7 @@
 const cards = document.querySelectorAll('.team-list-card');
+const refModalOpen = document.querySelector('.open-modal');
+const modal = document.querySelector('[data-modal]');
+const btnClose = document.querySelector('.close-modal');
 
 for (let i = 0; i < cards.length; i++){
     const card = cards[i];
@@ -10,8 +13,6 @@ function toRotate(evt) {
     const cardBack = this.querySelector('.back')
     const undercard = this.querySelector('.under-card')
     
-    console.log(evt.target.classList)
-
     if (evt.target.classList.contains('cat-img')) {
         cardFront.style.transform = 'perspective(600px) rotateY(-180deg)'
         cardBack.style.transform = 'perspective(600px) rotateY(0deg)'
@@ -31,4 +32,12 @@ function toRotate(evt) {
         this.style.marginBottom = '0px'
     }
     return;
+}
+
+refModalOpen.addEventListener('click', toggleModal)
+btnClose.addEventListener('click', toggleModal )
+function toggleModal(evt) {
+    evt.preventDefault();
+
+    modal.classList.toggle('is-hidden');
 }
