@@ -12,10 +12,7 @@ class FilmsAPI {
     } catch (error) {
       console.log(error);
     }
-  }
-    
+  }  
 }
-
-
 
 export default new FilmsAPI('28349e2a7add56dc6493ba9645697aa9')
