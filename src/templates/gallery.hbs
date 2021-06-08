@@ -2,13 +2,13 @@
     {{#each this}}
     <li class="gallery-card-item" data-id="{{id}}">
         <picture class="gallery-card-picture">
-            <source srcset="{{poster_path}}" type="image/jpg">
-            <img class="gallery-card-img" src="{{poster_path}}" alt="обложка фильма">
+            <source srcset="https://image.tmdb.org/t/p/w500{{poster_path}}" type="image/jpg">
+            <img class="gallery-card-img" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="обложка фильма">
         </picture>
         <div class="gallery-card-info">
-            <h2 class="gallery-card-title">{{original_title}}</h2>
+            <h2 class="gallery-card-title">{{title}}</h2>
             <p class="gallery-card-descr">
-                <span class="gallery-card-descr__genre">{{genre}}</span> |
+                <span class="gallery-card-descr__genre">{{#each genre}}{{this}} {{/each}}</span> |
                 <span class="gallery-card-descr__year">{{release_date}}</span>
                 <span class="gallery-card-descr__rating" hidden>{{popularity}}</span>
             </p>
