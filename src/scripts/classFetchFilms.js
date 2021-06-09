@@ -4,7 +4,7 @@ class FilmsAPI {
     this.baseURL = 'https://api.themoviedb.org/3'
     this.key = key;
     this.pageNumb = 1;
-    this.fetchBy = 'ternding';
+    this.fetchBy = 'trending';
   }
 
   async getGenres() {
