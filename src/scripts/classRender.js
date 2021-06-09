@@ -20,7 +20,6 @@ class RenderData {
   }
   async getRenderData(data, genres) {
     const asyncData = await data;
-    console.log(asyncData.results);
     const asyncGenres = await genres;
     return asyncData.results.map(obj => {
       return {
