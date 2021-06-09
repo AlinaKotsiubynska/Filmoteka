@@ -34,7 +34,7 @@ class FilmsAPI {
     try {
       const response = await fetch(`${this.baseURL}/search/movie?api_key=${this.key}&query=${query}&page=${page}`)
       const films = await response.json();
-      this.updatePageNumb(page)
+      this.updatePageNumb(page);
       return films
     } catch (error) {
       console.log(error);
@@ -47,7 +47,7 @@ class FilmsAPI {
     }
     try {
       const response = await fetch(`${this.baseURL}/trending/movie/day?api_key=${this.key}&page=${page}`)
-      this.updatePageNumb(page)
+      this.updatePageNumb(page);
       const films = await response.json();
       return films
     } catch (error) {
@@ -60,7 +60,7 @@ class FilmsAPI {
   }
 
   updatePageNumb(page) {
-    this.pageNumb = page
+    this.pageNumb = page;
   }
 }
 
