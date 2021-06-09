@@ -1,12 +1,15 @@
 class FilmsAPI {
+
   constructor(key) {
+    this.baseURL = 'https://api.themoviedb.org/3'
     this.key = key;
-    this.page = 1;
+    this.pageNumb = 1;
+    this.fetchBy = 'ternding';
   }
 
   async getGenres() {
     try {
-      const response = await fetch(`https://api.themoviedb.org/3/genre/list?api_key=${this.key}`);
+      const response = await fetch(`${this.baseURL}/genre/list?api_key=${this.key}`);
       const genres = await response.json();
       return genres.genres;
     } catch (error) {
@@ -16,7 +19,7 @@ class FilmsAPI {
   
   async getFilmById(filmId) {
     try {
-      const response = await fetch(`https://api.themoviedb.org/3/movie/${filmId}?api_key=${this.key}`)
+      const response = await fetch(`${this.baseURL}/movie/${filmId}?api_key=${this.key}`)
       const film = await response.json();
       return film
     } catch (error) {
@@ -24,9 +27,27 @@ class FilmsAPI {
     }
   }
 
-  async getFilmsByQuery(query) {
+  async getFilmsByQuery(query, page = this.pageNumb) {
+    if (this.fetchBy !== 'query') {
+      this.fetchBy = 'query';
+    }
     try {
-      const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.key}&query=${query}&page=${this.page}`)
+      const response = await fetch(`${this.baseURL}/search/movie?api_key=${this.key}&query=${query}&page=${page}`)
+      const films = await response.json();
+      this.updatePageNumb(page)
+      return films
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getTrendingFilms(page = this.pageNumb) {
+    if (this.fetchBy !== 'trending') {
+      this.fetchBy = 'trending';
+    }
+    try {
+      const response = await fetch(`${this.baseURL}/trending/movie/day?api_key=${this.key}&page=${page}`)
+      this.updatePageNumb(page)
       const films = await response.json();
       return films
     } catch (error) {
@@ -34,14 +55,12 @@ class FilmsAPI {
     }
   }
 
-  async getTrendingFilms() {
-    try {
-      const response = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${this.key}&page=${this.page}`)
-      const films = await response.json();
-      return films
-    } catch (error) {
-      console.log(error);
-    }
+  resetPageNumb() {
+    this.pageNumb = 1;
+  }
+
+  updatePageNumb(page) {
+    this.pageNumb = page
   }
 }
 
