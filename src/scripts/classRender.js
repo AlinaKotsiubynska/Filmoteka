@@ -3,13 +3,14 @@ import testObject from './testObject.js';
 import GenresNames from './classFetchFilms.js';
 
 class RenderData {
-  constructor(temp, selector) {
+  constructor(temp, selector, genres) {
     this.temp = temp;
     this.containerRef = document.querySelector(selector);
+    this.genres = genres;
   }
-  async render(data, genres) {
+  async render(data) {
     try {
-      const normalizeData = await this.getRenderData(data, genres);
+      const normalizeData = await this.getRenderData(data);
       const markup = await this.temp(normalizeData);
       this.containerRef.innerHTML = '';
       this.containerRef.insertAdjacentHTML('beforeend', markup);
@@ -18,9 +19,9 @@ class RenderData {
       console.log(err);
     }
   }
-  async getRenderData(data, genres) {
+  async getRenderData(data) {
     const asyncData = await data;
-    const asyncGenres = await genres;
+    const asyncGenres = await this.genres;
     return asyncData.results.map(obj => {
       return {
         ...obj,
@@ -55,11 +56,10 @@ class RenderData {
 
 //принимает шаблон hbs и СЕЛЕКТОР контейнера в котором будет рендериться
 //будет переиспользоваться так же в избранном
-
-const RenderGallery = new RenderData(galleryListTemp, '.js-gallery-container');
 const genresNames = GenresNames.getGenres();
 const films = GenresNames.getTrendingFilms();
-RenderGallery.render(films, genresNames);
+const RenderGallery = new RenderData(galleryListTemp, '.js-gallery-container', genresNames);
+RenderGallery.render(films);
 
 // хендлер висит на каждой item. Data - массив объектов, всех фильмов на страничке.
 const onItemClick = (event, data) => {
@@ -68,4 +68,4 @@ const onItemClick = (event, data) => {
   //open modal
 };
 
-export default RenderData
+export default new RenderData(galleryListTemp, '.js-gallery-container', genresNames);
