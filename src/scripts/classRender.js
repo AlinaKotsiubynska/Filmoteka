@@ -23,6 +23,7 @@ class RenderData {
     const asyncData = await data;
     const asyncGenres = await this.genres;
     return asyncData.results.map(obj => {
+
       return {
         ...obj,
         genre: this.getGenre(obj.genre_ids, asyncGenres),
@@ -69,3 +70,4 @@ const onItemClick = (event, data) => {
 };
 
 export default new RenderData(galleryListTemp, '.js-gallery-container', genresNames);
+
