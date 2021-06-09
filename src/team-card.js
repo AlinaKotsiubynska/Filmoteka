@@ -1,7 +1,5 @@
 const cards = document.querySelectorAll('.team-list-card');
 const refModalOpen = document.querySelector('.open-modal');
-const modal = document.querySelector('[data-modal]');
-const btnClose = document.querySelector('.close-modal');
 
 for (let i = 0; i < cards.length; i++){
     const card = cards[i];
@@ -32,12 +30,4 @@ function toRotate(evt) {
         this.style.marginBottom = '0px'
     }
     return;
-}
-
-refModalOpen.addEventListener('click', toggleModal)
-btnClose.addEventListener('click', toggleModal )
-function toggleModal(evt) {
-    evt.preventDefault();
-
-    modal.classList.toggle('is-hidden');
 }

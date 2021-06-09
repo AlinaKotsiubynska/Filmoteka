@@ -1,107 +1,123 @@
 <section class="section team">
-  <a href="#" class="open-modal">developers</a>
-  <div class="backdrop is-hidden" data-modal>
-    <div class="modal">
-      <button class="close-modal">X</button>
-      <ul class="team-list">
-        <li class="team-list-card">
-          <div class="front">
-            <picture>
-              <img src="./images/cats/0sobIENCwtJVkvaYv03NfwG9rBO-tsqRmVYtPjsxh4JL-rdnK3xg8iUeeAdB-qxCHobYcDOK.jpg"
-                alt="котан" class="cat-img">
-            </picture>
-          </div>
-          <div class="back">
-            <picture>
-              <img src="./images/team/Rostyslav.jpeg" alt="Rostyslav Bordyuh" class="team-photo">
-            </picture>
-          </div>
-          <div class="under-card">
-            <h3 class="card-title">Rostyslav Bordyuh</h3>
-            <p class="card-text">Frontend Developer</p>
-          </div>
-        </li>
-        <li class="team-list-card">
-          <div class="front">
-            <picture>
-              <img src="./images/cats/Alina-cat.jpg" alt="котан" class="cat-img">
-            </picture>
-          </div>
-          <div class="back">
-            <picture>
-              <img src="./images/team/Alina.jpg" alt="Alina Kotsiubynska" class="team-photo">
-            </picture>
-          </div>
-          <div class="under-card">
-            <h3 class="card-title">Alina Kotsiubynska</h3>
-            <p class="card-text">Frontend Developer</p>
-          </div>
-        </li>
-        <li class="team-list-card">
-          <div class="front">
-            <picture class="card-picture">
-              <img src="./images/cats/Serega-cat.jpg" alt="котан" class="cat-img">
-            </picture>
-          </div>
-          <div class="back">
-            <picture class="card-picture">
-              <img src="./images/team/Serega.jpg" alt="Serhii Tomaskevich" class="team-photo">
-            </picture>
-          </div>
-          <div class="under-card">
-            <h3 class="card-title">Serhii Tomaskevich</h3>
-            <p class="card-text">Frontend Developer</p>
-          </div>
-        </li>
-        <li class="team-list-card">
-          <div class="front">
-            <picture class="card-picture">
-              <img src="./images/cats/Alla-cat.jpg" alt="котан" class="cat-img">
-            </picture>
-          </div>
-          <div class="back">
-            <picture class="card-picture">
-              <img src="./images/team/Alla.jpg" alt="Alla Andronova" class="team-photo">
-            </picture>
-          </div>
-          <div class="under-card">
-            <h3 class="card-title">Alla Andronova</h3>
-            <p class="card-text">Frontend Developer</p>
-          </div>
-        </li>
-        <li class="team-list-card">
-          <div class="front">
-            <picture class="card-picture">
-              <img src="./images/cats/Svetlana-cat.jpg" alt="котан" class="cat-img">
-            </picture>
-          </div>
-          <div class="back">
-            <picture class="card-picture">
-              <img src="./images/team/Svetlana.jpg" alt="Svetlana" class="team-photo">
-            </picture>
-          </div>
-          <div class="under-card">
-            <h3 class="card-title">Svetlana</h3>
-            <p class="card-text">Frontend Developer</p>
-          </div>
-        </li>
-        <li class="team-list-card">
-          <div class="front">
-            <picture class="card-picture">
-              <img src="./images/cats/Julia-cat.jpg" alt="котан" class="cat-img">
-            </picture>
-          </div>
-          <div class="back">
-            <picture class="card-picture">
-              <img src="./images/team/Julia.jpg" alt="Svetlana" class="team-photo">
-            </picture>
-          </div>
-          <div class="under-card">
-            <h3 class="card-title">Юлия Куцын</h3>
-            <p class="card-text">Frontend Developer</p>
-          </div>
-        </li>
-      </ul>
+
+  <!-- Кнопка-триггер модального окна -->
+  <a data-bs-toggle="modal" data-bs-target="#exampleModal">
+    developers
+  </a>
+  
+  <!-- Модальное окно -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Над проектом работали Котики!&#128568;</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="team-list">
+            <li class="team-list-card">
+              <div class="front">
+                <picture>
+                  <img src="./images/cats/0sobIENCwtJVkvaYv03NfwG9rBO-tsqRmVYtPjsxh4JL-rdnK3xg8iUeeAdB-qxCHobYcDOK.jpg"
+                    alt="котан" class="cat-img">
+                </picture>
+              </div>
+              <div class="back">
+                <picture>
+                  <img src="./images/team/Rostyslav.jpeg" alt="Rostyslav Bordyuh" class="team-photo">
+                </picture>
+              </div>
+              <div class="under-card">
+                <h3 class="card-title">Rostyslav Bordyuh &#128570;</h3>
+                <p class="card-text">Frontend Developer</p>
+              </div>
+            </li>
+            <li class="team-list-card">
+              <div class="front">
+                <picture>
+                  <img src="./images/cats/Alina-cat.jpg" alt="котан" class="cat-img">
+                </picture>
+              </div>
+              <div class="back">
+                <picture>
+                  <img src="./images/team/Alina.jpg" alt="Alina Kotsiubynska" class="team-photo">
+                </picture>
+              </div>
+              <div class="under-card">
+                <h3 class="card-title">Alina Kotsiubynska &#128571;</h3>
+                <p class="card-text">Frontend Developer</p>
+              </div>
+            </li>
+            <li class="team-list-card">
+              <div class="front">
+                <picture class="card-picture">
+                  <img src="./images/cats/Serega-cat.jpg" alt="котан" class="cat-img">
+                </picture>
+              </div>
+              <div class="back">
+                <picture class="card-picture">
+                  <img src="./images/team/Serega.jpg" alt="Serhii Tomaskevich" class="team-photo">
+                </picture>
+              </div>
+              <div class="under-card">
+                <h3 class="card-title">Serhii Tomaskevich &#128572;</h3>
+                <p class="card-text">Frontend Developer</p>
+              </div>
+            </li>
+            <li class="team-list-card">
+              <div class="front">
+                <picture class="card-picture">
+                  <img src="./images/cats/Alla-cat.jpg" alt="котан" class="cat-img">
+                </picture>
+              </div>
+              <div class="back">
+                <picture class="card-picture">
+                  <img src="./images/team/Alla.jpg" alt="Alla Andronova" class="team-photo">
+                </picture>
+              </div>
+              <div class="under-card">
+                <h3 class="card-title">Alla Andronova &#128573;</h3>
+                <p class="card-text">Frontend Developer</p>
+              </div>
+            </li>
+            <li class="team-list-card">
+              <div class="front">
+                <picture class="card-picture">
+                  <img src="./images/cats/Svetlana-cat.jpg" alt="котан" class="cat-img">
+                </picture>
+              </div>
+              <div class="back">
+                <picture class="card-picture">
+                  <img src="./images/team/Svetlana.jpg" alt="Svetlana" class="team-photo">
+                </picture>
+              </div>
+              <div class="under-card">
+                <h3 class="card-title">Svetlana &#128576;</h3>
+                <p class="card-text">Frontend Developer</p>
+              </div>
+            </li>
+            <li class="team-list-card">
+              <div class="front">
+                <picture class="card-picture">
+                  <img src="./images/cats/Julia-cat.jpg" alt="котан" class="cat-img">
+                </picture>
+              </div>
+              <div class="back">
+                <picture class="card-picture">
+                  <img src="./images/team/Julia.jpg" alt="Svetlana" class="team-photo">
+                </picture>
+              </div>
+              <div class="under-card">
+                <h3 class="card-title">Юлия Куцын &#128569;</h3>
+                <p class="card-text">Frontend Developer</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
