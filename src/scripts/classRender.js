@@ -21,7 +21,7 @@ class RenderData {
   async getRenderData(data, genres) {
     const asyncData = await data;
     const asyncGenres = await genres;
-    return asyncData.results.map(obj => {
+    return asyncData.map(obj => {
       return {
         ...obj,
         genre: this.getGenre(obj.genre_ids, asyncGenres),
@@ -63,11 +63,10 @@ const filmsQuery = GenresNames.getFilmsByQuery('monkey')
 // RenderGallery.render(filmsTrending, genresNames);
 RenderGallery.render(filmsQuery, genresNames);
 
+
 // хендлер висит на каждой item. Data - массив объектов, всех фильмов на страничке.
 const onItemClick = (event, data) => {
   console.log(event.currentTarget.dataset.id); //каждая item уникальна и имеет свой айдишник!
   console.log(data); // Тут массив всех объектов - нужный ищи по dataset
   //open modal
 };
-
-export default RenderData
