@@ -9,8 +9,8 @@
         <div class="gallery-card-info">
             <h2 class="gallery-card-title">{{title}}</h2>
             <p class="gallery-card-descr">
-                <span class="gallery-card-descr__genre">{{#each genre}}{{this}} {{/each}}</span> |
-                <span class="gallery-card-descr__year">{{release_date}}</span>
+                <span class="gallery-card-descr__genre">{{#if genre}}{{#each genre}}{{this}} {{/each}}{{else}}пусто{{/if}}</span> |
+                <span class="gallery-card-descr__year">{{#if release_date}}{{release_date}}{{else}}пусто{{/if}}</span>
                 <span class="gallery-card-descr__rating" hidden>{{popularity}}</span>
             </p>
         </div>
