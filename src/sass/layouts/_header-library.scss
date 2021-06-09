@@ -1,8 +1,8 @@
-.header {
+.header.library {
   height: 230px;
   background-color: rgba(0, 0, 0, 0.56);
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-    url('../images/header/bghome-mob.jpg');
+    url('../images/header-library/bglib-mob.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -11,68 +11,30 @@
     screen and (min-resolution: 192dpi) and (min-width: 320px),
     screen and (min-resolution: 2dppx) and (min-width: 320px) {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url('../images/header/bghome-mob@2x.jpg');
+      url('../images/header-library/bglib-mob@2x.jpg');
   }
 
   @media screen and (min-width: 768px) {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url('../images/header/bghome-tab.jpg');
+      url('../images/header-library/bglib-tab.jpg');
   }
 
   @media screen and (min-device-pixel-ratio: 2) and (min-width: 768px),
     screen and (min-resolution: 192dpi) and (min-width: 768px),
     screen and (min-resolution: 2dppx) and (min-width: 768px) {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url('../images/header/bghome-tab@2x.jpg');
+      url('../images/header-library/bglib-tab@2x.jpg');
   }
 
   @media screen and (min-width: 1024px) {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url('../images/header/bghome-desk.jpg');
+      url('../images/header-library/bglib-desk.jpg');
   }
 
   @media screen and (min-device-pixel-ratio: 2) and (min-width: 1024px),
     screen and (min-resolution: 192dpi) and (min-width: 1024px),
     screen and (min-resolution: 2dppx) and (min-width: 1024px) {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url('../images/header/bghome-desk@2x.jpg');
-  }
-}
-
-.header-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-
-  &-logo {
-    display: flex;
-    align-items: center;
-    margin-bottom: 43px;
-    padding-top: 41px;
-
-    &-icon {
-      margin-right: 10px;
-    }
-
-    &-text {
-      display: none;
-
-      @media screen and (min-width: 768px) {
-        display: flex;
-        align-items: center;
-        text-align: center;
-        font-weight: 500;
-        font-size: 30px;
-        line-height: 1.172;
-        color: #ffffff;
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .header-nav-logo:hover,
-  .header-nav-logo:focus {
-    color: #ff6b08;
+      url('../images/header-library/bglib-desk@2x.jpg');
   }
 }
