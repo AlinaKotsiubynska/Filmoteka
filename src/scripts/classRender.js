@@ -1,8 +1,7 @@
-import modalTemp from '../templates/modal.hbs'
 import galleryListTemp from '../templates/gallery.hbs';
 import testObject from './testObject.js';
 import GenresNames from './classFetchFilms.js';
-import FetchFilms from './classFetchFilms.js';
+import onItemClick from './modal';
 
 
 class RenderData {
@@ -50,7 +49,7 @@ class RenderData {
   addEventListeners(data) {
     document.querySelectorAll('.gallery-card-item').forEach(item =>
       item.addEventListener('click', event => {
-        onItemClick(event, data);
+        onItemClick(event);
       }),
     );
   }
@@ -65,71 +64,4 @@ RenderGallery.render(testObject, genresNames);
 
 // const renderModal = new RenderData(modalTemp, '.modal-wrapper');
 // renderModal.render(testObject);
-
-// хендлер висит на каждой item. Data - массив объектов, всех фильмов на страничке.
-const onItemClick = async (event, data) => {
-  //console.log(event.currentTarget.dataset.id); //каждая item уникальна и имеет свой айдишник!
-  //console.log(data); // Тут массив всех объектов - нужный ищи по dataset
-  //open modal
-  //await getFilm(event.currentTarget.dataset.id);
-
- //openModal();
-  
-  openModal(event.currentTarget.dataset.id)
-
-}
-
-async function getFilm(id) {
-    const a = await FetchFilms.getFilmById(id);
-    console.log(a);
-   const markup =  modalTemp(a);
-
-    const modalWrapper = document.querySelector('.modal-wrapper');
-    modalWrapper.insertAdjacentHTML('beforeend', markup)
-}
-
-async function openModal(filmId) {
-await getFilm(filmId)
-
-  const backdrop = document.querySelector('.backdrop');
-
-  backdrop.classList.remove('is-hidden');
-
-    window.addEventListener('keyup', onEscPress);
-    backdrop.addEventListener('click', onBackdropClick);
-
-   onBtnClose();
-  
-  function onBtnClose() {
-    const btnClose = document.querySelector('.modal-btn-close');
-
-  btnClose.addEventListener('click', () => {
-    backdrop.classList.add('is-hidden');
-  })
-}
-  
-  function onEscPress(e) {
-if (e.code === "Escape") {
-  onCloseModal();
-  }
-}
-
-  function onCloseModal() {
-  backdrop.classList.add('is-hidden');
-
-  window.removeEventListener("keyup", onEscPress);
-  backdrop.removeEventListener("click", onBackdropClick);
-}
-  
-  function onBackdropClick(e) {
- if (e.target === e.currentTarget) {
-    onCloseModal();
-  }
-}
-}
-
-
-
-//export default RenderData
-
 
