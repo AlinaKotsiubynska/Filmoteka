@@ -1,7 +1,10 @@
 class FilmsAPI {
   constructor(key) {
     this.key = key;
-    this.page = 1;
+    this.pageNumb = 1;
+    this.fetchBy = 'trending';
+
+
   }
 
   async getGenres() {

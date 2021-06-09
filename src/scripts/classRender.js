@@ -58,7 +58,11 @@ class RenderData {
 
 const RenderGallery = new RenderData(galleryListTemp, '.js-gallery-container');
 const genresNames = GenresNames.getGenres();
-RenderGallery.render(testObject, genresNames);
+const filmsTrending = GenresNames.getTrendingFilms();
+const filmsQuery = GenresNames.getFilmsByQuery('monkey')
+// RenderGallery.render(filmsTrending, genresNames);
+RenderGallery.render(filmsQuery, genresNames);
+
 
 // хендлер висит на каждой item. Data - массив объектов, всех фильмов на страничке.
 const onItemClick = (event, data) => {
