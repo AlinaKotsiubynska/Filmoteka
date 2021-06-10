@@ -1,6 +1,8 @@
 import galleryListTemp from '../templates/gallery.hbs';
 import testObject from './testObject.js';
 import GenresNames from './classFetchFilms.js';
+import onItemClick from './modal';
+
 
 class RenderData {
   constructor(temp, selector, genres) {
@@ -49,7 +51,7 @@ class RenderData {
   addEventListeners(data) {
     document.querySelectorAll('.gallery-card-item').forEach(item =>
       item.addEventListener('click', event => {
-        onItemClick(event, data);
+        onItemClick(event);
       }),
     );
   }
@@ -62,12 +64,4 @@ const films = GenresNames.getTrendingFilms();
 const RenderGallery = new RenderData(galleryListTemp, '.js-gallery-container', genresNames);
 RenderGallery.render(films);
 
-// хендлер висит на каждой item. Data - массив объектов, всех фильмов на страничке.
-const onItemClick = (event, data) => {
-  console.log(event.currentTarget.dataset.id); //каждая item уникальна и имеет свой айдишник!
-  console.log(data); // Тут массив всех объектов - нужный ищи по dataset
-  //open modal
-};
-
-export default new RenderData(galleryListTemp, '.js-gallery-container', genresNames);
 
