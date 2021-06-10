@@ -164,17 +164,21 @@
 }
 
 .modal-btn-close {
+  display: block;
   position: absolute;
   top: 10px;
   right: 10px;
   width: 30px;
   height: 30px;
 
+  color: #000000;
   // background-color: black;
   border: none;
   cursor: pointer;
 }
 
-// .modal-icon {
-//   fill: black;
-// }
+.modal-icon {
+  fill: black;
+  width: 12px;
+  height: 12px;
+}

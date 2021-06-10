@@ -5,13 +5,14 @@ import onItemClick from './modal';
 
 
 class RenderData {
-  constructor(temp, selector) {
+  constructor(temp, selector, genres) {
     this.temp = temp;
     this.containerRef = document.querySelector(selector);
+    this.genres = genres;
   }
-  async render(data, genres) {
+  async render(data) {
     try {
-      const normalizeData = await this.getRenderData(data, genres);
+      const normalizeData = await this.getRenderData(data);
       const markup = await this.temp(normalizeData);
       this.containerRef.innerHTML = '';
       this.containerRef.insertAdjacentHTML('beforeend', markup);
@@ -20,10 +21,11 @@ class RenderData {
       console.log(err);
     }
   }
-  async getRenderData(data, genres) {
+  async getRenderData(data) {
     const asyncData = await data;
-    const asyncGenres = await genres;
-    return asyncData.map(obj => {
+    const asyncGenres = await this.genres;
+    return asyncData.results.map(obj => {
+
       return {
         ...obj,
         genre: this.getGenre(obj.genre_ids, asyncGenres),
@@ -57,11 +59,9 @@ class RenderData {
 
 //принимает шаблон hbs и СЕЛЕКТОР контейнера в котором будет рендериться
 //будет переиспользоваться так же в избранном
-
-const RenderGallery = new RenderData(galleryListTemp, '.js-gallery-container');
 const genresNames = GenresNames.getGenres();
-RenderGallery.render(testObject, genresNames);
+const films = GenresNames.getTrendingFilms();
+const RenderGallery = new RenderData(galleryListTemp, '.js-gallery-container', genresNames);
+RenderGallery.render(films);
 
-// const renderModal = new RenderData(modalTemp, '.modal-wrapper');
-// renderModal.render(testObject);
 

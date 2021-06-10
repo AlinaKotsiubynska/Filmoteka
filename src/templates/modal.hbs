@@ -1,11 +1,15 @@
 <div class="modal-container">
     <button type="button" class="modal-btn-close">
         <svg class="modal-icon" width="12" height="12">
-            <use href="./images/sprite.svg#close"></use>
+            <use href="./images/icons/sprite.svg#icon-close"></use>
         </svg>
     </button>
     <div class="modal-image-wrapper">
-        <img class="modal-img" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt={{title}}>
+        <picture class="gallery-card-picture">
+            <source srcset="{{#if poster_path}}https://image.tmdb.org/t/p/w500{{poster_path}}{{/if}}" type="image/jpg">
+            <img class="gallery-card-img" src="https://i.pinimg.com/564x/f7/f7/73/f7f7733f9e3409f0ef433f3074525790.jpg"
+                alt="обложка фильма">
+        </picture>
     </div>
     <div class="left-side-modal">
         <div class="modal-description">
