@@ -29,8 +29,4 @@
     "posthtml-include": "^1.6.2",
     "sass": "^1.32.8"
   },
-  "dependencies": {
-    "@popperjs/core": "^2.9.2",
-    "bootstrap.min.js": "^3.3.5"
-  }
 }
