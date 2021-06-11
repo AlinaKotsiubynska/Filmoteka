@@ -64,4 +64,4 @@ const films = GenresNames.getTrendingFilms();
 const RenderGallery = new RenderData(galleryListTemp, '.js-gallery-container', genresNames);
 RenderGallery.render(films);
 
-
+export default new RenderData(galleryListTemp, '.js-gallery-container', genresNames);
