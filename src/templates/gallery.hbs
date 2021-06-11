@@ -1,0 +1,19 @@
+<ul class="gallery-list">
+    {{#each this}}
+    <li class="gallery-card-item" data-id="{{id}}">
+        <picture class="gallery-card-picture">
+            <source srcset="{{#if poster_path}}https://image.tmdb.org/t/p/w500{{poster_path}}{{/if}}" type="image/jpg">
+            <img class="gallery-card-img" src="https://i.pinimg.com/564x/f7/f7/73/f7f7733f9e3409f0ef433f3074525790.jpg"
+                alt="обложка фильма">
+        </picture>
+        <div class="gallery-card-info">
+            <h2 class="gallery-card-title">{{title}}</h2>
+            <p class="gallery-card-descr">
+                <span class="gallery-card-descr__genre">{{#if genre}}{{#each genre}}{{this}} {{/each}}{{else}}пусто{{/if}}</span> |
+                <span class="gallery-card-descr__year">{{#if release_date}}{{release_date}}{{else}}пусто{{/if}}</span>
+                <span class="gallery-card-descr__rating" hidden>{{popularity}}</span>
+            </p>
+        </div>
+    </li>
+    {{/each}}
+</ul>
