@@ -17,6 +17,7 @@ $pagination-hover-border-color: transparent;
 
 .page-item .page-link {
   border-radius: 5px;
+  cursor: pointer;
 }
 .page-item:last-child .page-link:hover {
   color: white;
@@ -33,6 +34,10 @@ $pagination-hover-border-color: transparent;
 .page-item:first-child .page-link {
   background-color: #f7f7f7;
   color: black;
+}
+.page-item:first-child .page-link .active {
+  color: white;
+  background-color: red;
 }
 
 .footer {
