@@ -55,6 +55,17 @@ class FilmsAPI {
     }
   }
 
+  async getFilmTrailers(id) {
+  try {
+    const response = await fetch(`${this.baseURL}/movie/${id}/videos?api_key=${this.key}&language=en-US`);
+    const trailer = await response.json();
+    return trailer
+  }
+  catch (error) {
+      console.log(error);
+    }
+}
+
   resetPageNumb() {
     this.pageNumb = 1;
   }
