@@ -1,0 +1,182 @@
+.header {
+  height: 230px;
+  background-color: rgba(0, 0, 0, 0.56);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+    url('../images/header/bghome-mob.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  @media screen and (min-device-pixel-ratio: 2) and (min-width: 320px),
+    screen and (min-resolution: 192dpi) and (min-width: 320px),
+    screen and (min-resolution: 2dppx) and (min-width: 320px) {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url('../images/header/bghome-mob@2x.jpg');
+  }
+
+  @media screen and (min-width: 768px) {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url('../images/header/bghome-tab.jpg');
+  }
+
+  @media screen and (min-device-pixel-ratio: 2) and (min-width: 768px),
+    screen and (min-resolution: 192dpi) and (min-width: 768px),
+    screen and (min-resolution: 2dppx) and (min-width: 768px) {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url('../images/header/bghome-tab@2x.jpg');
+  }
+
+  @media screen and (min-width: 1024px) {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url('../images/header/bghome-desk.jpg');
+  }
+
+  @media screen and (min-device-pixel-ratio: 2) and (min-width: 1024px),
+    screen and (min-resolution: 192dpi) and (min-width: 1024px),
+    screen and (min-resolution: 2dppx) and (min-width: 1024px) {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url('../images/header/bghome-desk@2x.jpg');
+  }
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+
+  &-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 43px;
+    padding-top: 41px;
+
+    &-icon {
+      margin-right: 10px;
+    }
+
+    &-text {
+      display: none;
+
+      @media screen and (min-width: 768px) {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 1.172;
+        color: #ffffff;
+
+        transition: color 250ms cubic-bezier(0.77, 0, 0.175, 1);
+
+        &:hover,
+        &:focus {
+          color: #ff6b08;
+        }
+      }
+    }
+  }
+}
+
+.header-nav-list {
+  display: flex;
+  align-items: end;
+  padding-top: 12px;
+
+  &-item {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.167;
+
+    &:not(:last-child) {
+      margin-right: 39px;
+    }
+  }
+
+  &-link {
+    position: relative;
+
+    color: #ffffff;
+    transition: color 250ms cubic-bezier(0.77, 0, 0.175, 1);
+
+    &:hover,
+    &:focus {
+      color: #ff6b08;
+    }
+  }
+}
+
+.current::after {
+  position: absolute;
+  top: 15px;
+  left: 0px;
+  content: '';
+
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #ff6b08;
+}
+
+.search {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  margin: 0 auto;
+  margin-bottom: 22px;
+
+  @media screen and (min-width: 768px) {
+    width: 336px;
+  }
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+
+  background-color: transparent;
+  border: none;
+  border-bottom: 0.5px solid #ffffff;
+  color: #ffffff;
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.143;
+  opacity: 0.8;
+
+  &::placeholder {
+    color: #ffffff;
+    text-align: left;
+    opacity: 0.8;
+  }
+}
+
+.search-icon {
+  position: absolute;
+  right: 2px;
+  bottom: 5px;
+
+  display: flex;
+  width: 12px;
+  height: 12px;
+  color: #ffffff;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.search-error {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+
+  font-size: 14px;
+  line-height: 1.143;
+  color: rgba(147, 20, 206, 0.8);
+}

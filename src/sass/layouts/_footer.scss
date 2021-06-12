@@ -1,0 +1,82 @@
+// @import '../node_modules/bootstrap/scss/bootstrap';
+@import '../node_modules/bootstrap/scss/functions';
+
+// 2. Include any default variable overrides here
+
+$pagination-color: black;
+$pagination-hover-color: white;
+$pagination-hover-bg: #ff6b08;
+$pagination-active-bg: #ff6b08;
+$pagination-border-color: transparent;
+$pagination-hover-border-color: transparent;
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import '../node_modules/bootstrap/scss/variables';
+@import '../node_modules/bootstrap/scss/mixins';
+@import '../node_modules/bootstrap/scss/pagination';
+
+.page-item .page-link {
+  border-radius: 5px;
+  cursor: pointer;
+}
+.page-item:last-child .page-link:hover {
+  color: white;
+  background-color: #ff6b08;
+}
+.page-item:first-child .page-link:hover {
+  color: white;
+  background-color: #ff6b08;
+}
+.page-item:last-child .page-link {
+  background-color: #f7f7f7;
+  color: black;
+}
+.page-item:first-child .page-link {
+  background-color: #f7f7f7;
+  color: black;
+}
+.page-item:first-child .page-link .active {
+  color: white;
+  background-color: red;
+}
+
+.footer {
+  padding-bottom: 30px;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: 69px;
+}
+
+.lisence {
+  margin-bottom: 25px;
+}
+
+.lisense-common {
+  text-align: center;
+
+  font-size: 14px;
+  line-height: 1.142px;
+  color: rgba(84, 84, 84, 1);
+}
+
+.lisense-link {
+  border-bottom: 2px solid #ff6b08;
+}
+
+@media screen and (min-width: 768px) {
+  .footer-lisense {
+    display: flex;
+    justify-content: center;
+  }
+  .lisence {
+    margin: 0px;
+  }
+  .lisense-common {
+    font-size: 16px;
+    line-height: 1.187px;
+  }
+}

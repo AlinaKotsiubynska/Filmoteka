@@ -1,4 +1,37 @@
 <header class="section header">
   <div class="container">
+    <nav class="header-nav">
+      <a class="header-nav-logo" href="./index.html" aria-label="логотип сайта" lang="en">
+        <svg class="header-nav-logo-icon" width="24" height="24">
+          <use href="./images/icons/sprite.svg#icon-film"></use>
+        </svg>
+        <span class="header-nav-logo-text">Filmoteka</span>
+      </a>
+
+      <ul class="header-nav-list">
+        <li class="header-nav-list-item">
+          <a href="./index.html" class="current header-nav-list-link">Home</a>
+        </li>
+        <li class="header-nav-list-item">
+          <a href="./library.html" class="header-nav-list-link">My library</a>
+        </li>
+      </ul>
+    </nav>
+    <include src="./partials/loginButton.html"></include>
+    <div class="search">
+     <input
+      class="search-input"
+      type="text"
+      name="message"
+      placeholder="Search a movie"
+     >
+     <svg class="search-icon">
+       <use href="./images/icons/sprite.svg#icon-search"></use>
+     </svg>
+    </div>
+
+    <p class="search-error">
+      Search result not successful. Enter the correct movie name
+    </p>
   </div>
 </header>
