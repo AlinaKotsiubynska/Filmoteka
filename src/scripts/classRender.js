@@ -1,8 +1,8 @@
 import galleryListTemp from '../templates/gallery.hbs';
-import testObject from './testObject.js';
+import libGalleryListTemp from '../templates/lib-gallery.hbs';
 import GenresNames from './classFetchFilms.js';
 import onItemClick from './modal';
-
+import options from './baseSettingsClassAuth.js';
 
 class RenderData {
   constructor(temp, selector, genres) {
@@ -25,7 +25,6 @@ class RenderData {
     const asyncData = await data;
     const asyncGenres = await this.genres;
     return asyncData.results.map(obj => {
-
       return {
         ...obj,
         genre: this.getGenre(obj.genre_ids, asyncGenres),
@@ -47,8 +46,28 @@ class RenderData {
     });
     return genreArr;
   }
+  rederWithAuth() {
+    const tokenId = localStorage.getItem('id');
+    fetch(`https://auth-filmoteka-default-rtdb.europe-west1.firebasedatabase.app/films.json?auth=${tokenId}`)
+      .then(res => res.json())
+      .then(d => {
+        console.log(Object.values(d));
+        const libGalRef = document.querySelector('.js-lib-gallery-container');
+        const markup = libGalleryListTemp(Object.values(d));
+        libGalRef.insertAdjacentHTML('beforeend', markup);
+      });
+  }
+  addData(film) {
+    const tokenId = localStorage.getItem('id');
+    fetch(
+      `https://auth-filmoteka-default-rtdb.europe-west1.firebasedatabase.app/films.json?auth=${tokenId}`,
+      options.addFilm(film),
+    )
+      .then(res => res.json())
+      .then(d => console.log(d));
+  }
 
-  addEventListeners(data) {
+  addEventListeners() {
     document.querySelectorAll('.gallery-card-item').forEach(item =>
       item.addEventListener('click', event => {
         onItemClick(event);
@@ -62,6 +81,10 @@ class RenderData {
 const genresNames = GenresNames.getGenres();
 const films = GenresNames.getTrendingFilms();
 const RenderGallery = new RenderData(galleryListTemp, '.js-gallery-container', genresNames);
-RenderGallery.render(films);
+if (localStorage.getItem('id')) {
+  RenderGallery.rederWithAuth();
+} else {
+  RenderGallery.render(films);
+}
 
 export default new RenderData(galleryListTemp, '.js-gallery-container', genresNames);

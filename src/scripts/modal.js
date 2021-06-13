@@ -1,7 +1,7 @@
 import modalTemp from '../templates/modal.hbs';
 import FetchFilms from './classFetchFilms.js';
 import * as basicLightbox from 'basiclightbox';
-import 'basiclightbox/dist/basicLightbox.min.css';
+// import 'basiclightbox/dist/basicLightbox.min.css';
 
 const onItemClick = async (event) => {
 const id = event.currentTarget.dataset.id
@@ -14,18 +14,24 @@ async function getFilm(filmId) {
   //console.log(filmId)
     const a = await FetchFilms.getFilmById(filmId);
     //console.log(a);
+
   const markup = modalTemp(a);
 
   const modalWrapper = document.querySelector('.modal-wrapper');
-  modalWrapper.innerHTML = "";
-  modalWrapper.insertAdjacentHTML('beforeend', markup)
+  modalWrapper.innerHTML = '';
+  modalWrapper.insertAdjacentHTML('beforeend', markup);
+  modalWrapper.querySelector('.btn-add-watch').addEventListener('click', () => {
+    onWatchBtnClick(a);
+  });
+  // modalWrapper.querySelector('.btn-add-queue').addEventListener('click', onQueueBtnClick);
 }
 
 const backdrop = document.querySelector('.backdrop');
 
-function openModal(id) {
-  console.log('id', id)
- backdrop.classList.remove('is-hidden');
+
+function openModal() {
+  backdrop.classList.remove('is-hidden');
+
   document.body.style.overflow = 'hidden';
 
   window.addEventListener('keyup', onEscPress);
@@ -35,40 +41,44 @@ function openModal(id) {
   
   toFixedNumber();
 
-   onBtnClose();
+  onBtnClose();
 }
 
+function onBtnClose() {
+  const btnClose = document.querySelector('.modal-btn-close');
 
-  function onBtnClose() {
-    const btnClose = document.querySelector('.modal-btn-close');
-
-    btnClose.addEventListener('click', () => {
-      backdrop.classList.add('is-hidden');
+  btnClose.addEventListener('click', () => {
+    backdrop.classList.add('is-hidden');
 
     document.body.style.overflow = '';
-    });
-}
-  
-  function onEscPress(e) {
-if (e.code === "Escape") {
-  onCloseModal();
-  }
+  });
 }
 
-  function onCloseModal() {
-  backdrop.classList.add('is-hidden');
-
-  window.removeEventListener("keyup", onEscPress);
-    backdrop.removeEventListener("click", onBackdropClick);
-    
-    document.body.style.overflow = '';
-}
-  
-  function onBackdropClick(e) {
- if (e.target === e.currentTarget) {
+function onEscPress(e) {
+  if (e.code === 'Escape') {
     onCloseModal();
   }
+}
+
+function onCloseModal() {
+  backdrop.classList.add('is-hidden');
+
+  window.removeEventListener('keyup', onEscPress);
+  backdrop.removeEventListener('click', onBackdropClick);
+
+  document.body.style.overflow = '';
+}
+
+function onBackdropClick(e) {
+  if (e.target === e.currentTarget) {
+    onCloseModal();
   }
+}
+
+function onWatchBtnClick(a) {
+  Render.addData(a);
+}
+
 
 function toFixedNumber() {
 
