@@ -1,7 +1,6 @@
 import modalTemp from '../templates/modal.hbs';
 import FetchFilms from './classFetchFilms.js';
 import * as basicLightbox from 'basiclightbox';
-console.dir(basicLightbox);
 import 'basiclightbox/dist/basicLightbox.min.css';
 
 const onItemClick = async (event) => {
