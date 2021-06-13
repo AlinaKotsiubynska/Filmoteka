@@ -1,7 +1,7 @@
 import modalTemp from '../templates/modal.hbs';
 import FetchFilms from './classFetchFilms.js';
 import * as basicLightbox from 'basiclightbox';
-// import 'basiclightbox/dist/basicLightbox.min.css';
+import 'basiclightbox/dist/basicLightbox.min.css';
 
 const onItemClick = async (event) => {
 const id = event.currentTarget.dataset.id
@@ -14,24 +14,18 @@ async function getFilm(filmId) {
   //console.log(filmId)
     const a = await FetchFilms.getFilmById(filmId);
     //console.log(a);
-
   const markup = modalTemp(a);
 
   const modalWrapper = document.querySelector('.modal-wrapper');
-  modalWrapper.innerHTML = '';
-  modalWrapper.insertAdjacentHTML('beforeend', markup);
-  modalWrapper.querySelector('.btn-add-watch').addEventListener('click', () => {
-    onWatchBtnClick(a);
-  });
-  // modalWrapper.querySelector('.btn-add-queue').addEventListener('click', onQueueBtnClick);
+  modalWrapper.innerHTML = "";
+  modalWrapper.insertAdjacentHTML('beforeend', markup)
 }
 
 const backdrop = document.querySelector('.backdrop');
 
-
-function openModal() {
+function openModal(id) {
+  console.log('id', id)
   backdrop.classList.remove('is-hidden');
-
   document.body.style.overflow = 'hidden';
 
   window.addEventListener('keyup', onEscPress);
@@ -44,41 +38,37 @@ function openModal() {
   onBtnClose();
 }
 
-function onBtnClose() {
-  const btnClose = document.querySelector('.modal-btn-close');
 
-  btnClose.addEventListener('click', () => {
-    backdrop.classList.add('is-hidden');
+  function onBtnClose() {
+    const btnClose = document.querySelector('.modal-btn-close');
+
+    btnClose.addEventListener('click', () => {
+      backdrop.classList.add('is-hidden');
 
     document.body.style.overflow = '';
-  });
+    });
 }
-
-function onEscPress(e) {
-  if (e.code === 'Escape') {
-    onCloseModal();
+  
+  function onEscPress(e) {
+if (e.code === "Escape") {
+  onCloseModal();
   }
 }
 
-function onCloseModal() {
+  function onCloseModal() {
   backdrop.classList.add('is-hidden');
 
-  window.removeEventListener('keyup', onEscPress);
-  backdrop.removeEventListener('click', onBackdropClick);
-
-  document.body.style.overflow = '';
+  window.removeEventListener("keyup", onEscPress);
+    backdrop.removeEventListener("click", onBackdropClick);
+    
+    document.body.style.overflow = '';
 }
-
-function onBackdropClick(e) {
-  if (e.target === e.currentTarget) {
+  
+  function onBackdropClick(e) {
+ if (e.target === e.currentTarget) {
     onCloseModal();
   }
-}
-
-function onWatchBtnClick(a) {
-  Render.addData(a);
-}
-
+  }
 
 function toFixedNumber() {
 
