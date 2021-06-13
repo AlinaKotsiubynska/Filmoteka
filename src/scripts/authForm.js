@@ -1,14 +1,17 @@
-const loginBtn = document.getElementById('login')
+import Auth from './classAuth.js';
+const ClassAuth = new Auth();
+
+const loginBtn = document.getElementById('login');
 const header = document.querySelector('header');
 const authFotm = `<div id="modal-auth" class="backdrop">
   <div class="auth-modal-container modal-container">
     <form action="#" name="user-auth" class="auth-form">
       <fieldset class="auth-form-inputs">
         <label> Email
-          <input type="email" name="user-email" placeholder="Enter email">
+          <input class="email" type="email" name="user-email" placeholder="Enter email">
         </label>
         <label> Password
-          <input type="text" name="user-password" placeholder="Enter password">
+          <input class="password" type="text" name="user-password" placeholder="Enter password">
         </label>
       </fieldset>
       <div>
@@ -17,18 +20,25 @@ const authFotm = `<div id="modal-auth" class="backdrop">
       </div>
       
     </form>
-  </div>
-</div>`;
+  </div>`;
 
 loginBtn.addEventListener('click', openAuthForm);
 
 function openAuthForm() {
-  header.insertAdjacentHTML('afterend', authFotm)
-  const modalAuth = document.getElementById('modal-auth')
-  modalAuth.addEventListener('click', closeModal)
+  header.insertAdjacentHTML('afterend', authFotm);
 
+  document.querySelector('.auth-form').addEventListener('submit', submitHandler);
 }
 
 function closeModal(e) {
-  e.currentTarget.remove()
+  e.currentTarget.remove();
+}
+
+function submitHandler(e) {
+  e.preventDefault();
+  const email = document.querySelector('.email').value;
+  const password = document.querySelector('.password').value;
+  ClassAuth.getToken(email, password);
+  const modalAuth = document.getElementById('modal-auth');
+  modalAuth.addEventListener('click', closeModal);
 }

@@ -1,15 +1,25 @@
 <div class="modal-container">
     <button type="button" class="modal-btn-close">
-        <svg class="modal-icon" width="12" height="12">
-            <use href="./images/icons/sprite.svg#icon-close"></use>
+        <svg class="modal-icon" width="20" height="20" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 8L22 22" stroke="black" stroke-width="2" />
+            <path d="M8 22L22 8" stroke="black" stroke-width="2" />
         </svg>
     </button>
     <div class="modal-image-wrapper">
-        <picture class="gallery-card-picture">
+        <picture class="modal-pictures">
             <source srcset="{{#if poster_path}}https://image.tmdb.org/t/p/w500{{poster_path}}{{/if}}" type="image/jpg">
-            <img class="gallery-card-img" src="https://i.pinimg.com/564x/f7/f7/73/f7f7733f9e3409f0ef433f3074525790.jpg"
+            <img class="modal-img" src="https://i.pinimg.com/564x/f7/f7/73/f7f7733f9e3409f0ef433f3074525790.jpg"
                 alt="обложка фильма">
+            <div class="modal-overlay"></div>
         </picture>
+
+        <button type="button" class="modal-trailer">
+            <svg class="icon-play" width="60" height="60" viewBox="0 0 30 30" xmlns="http://www.w3.org/1999/xlink">
+                <path
+                    d="M30.662 5.003c-4.488-0.645-9.448-1.003-14.662-1.003s-10.174 0.358-14.662 1.003c-0.86 3.366-1.338 7.086-1.338 10.997s0.477 7.63 1.338 10.997c4.489 0.645 9.448 1.003 14.662 1.003s10.174-0.358 14.662-1.003c0.86-3.366 1.338-7.086 1.338-10.997s-0.477-7.63-1.338-10.997zM12 22v-12l10 6-10 6z">
+                </path>
+            </svg>
+        </button>
     </div>
     <div class="left-side-modal">
         <div class="modal-description">
@@ -22,7 +32,7 @@
                 </li>
                 <li class="modal-description-item">
                     <p class="modal-description-categories">Popularity</p>
-                    <p class="modal-description-value">{{popularity}}</p>
+                    <p class="modal-description-value js-fixed">{{popularity}}</p>
                 </li>
                 <li class="modal-description-item">
                     <p class="modal-description-categories">Original Title</p>
