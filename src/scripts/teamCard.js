@@ -1,4 +1,4 @@
-import 'bootstrap';
+
 const cards = document.querySelectorAll('.team-list-card');
 const refModalOpen = document.querySelector('.open-modal');
 
