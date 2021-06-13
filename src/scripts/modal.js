@@ -1,15 +1,20 @@
 import modalTemp from '../templates/modal.hbs';
 import FetchFilms from './classFetchFilms.js';
-import Render from './classRender.js';
+import * as basicLightbox from 'basiclightbox';
+// import 'basiclightbox/dist/basicLightbox.min.css';
 
-const onItemClick = async event => {
-  await getFilm(event.currentTarget.dataset.id);
+const onItemClick = async (event) => {
+const id = event.currentTarget.dataset.id
+  await getFilm(id);
 
-  openModal();
-};
+  openModal(id);
+}
 
 async function getFilm(filmId) {
-  const a = await FetchFilms.getFilmById(filmId);
+  //console.log(filmId)
+    const a = await FetchFilms.getFilmById(filmId);
+    //console.log(a);
+
   const markup = modalTemp(a);
 
   const modalWrapper = document.querySelector('.modal-wrapper');
@@ -23,12 +28,18 @@ async function getFilm(filmId) {
 
 const backdrop = document.querySelector('.backdrop');
 
+
 function openModal() {
   backdrop.classList.remove('is-hidden');
+
   document.body.style.overflow = 'hidden';
 
   window.addEventListener('keyup', onEscPress);
   backdrop.addEventListener('click', onBackdropClick);
+
+  trailer(id);
+  
+  toFixedNumber();
 
   onBtnClose();
 }
@@ -68,4 +79,35 @@ function onWatchBtnClick(a) {
   Render.addData(a);
 }
 
-export default onItemClick;
+
+function toFixedNumber() {
+
+const fixedPopularity = document.querySelector('.js-fixed');
+  fixedPopularity.textContent = parseFloat(fixedPopularity.textContent).toFixed(1);
+}
+
+function trailer(id) {
+  
+  const icon = document.querySelector('.modal-trailer');
+
+  icon.addEventListener('click', async () => {
+
+    try {
+      const response = await FetchFilms.getFilmTrailers(id);
+      const trailerKey = await response.results[2].key;
+      
+      const trailerYoutube = basicLightbox.create(`
+		<iframe width="560" height="315" src='https://www.youtube.com/embed/${trailerKey}' frameborder="0" allowfullscreen></iframe>
+  `)
+    trailerYoutube.show()
+    }
+    catch (error) {
+console.log(error)
+    }
+  
+  });
+    
+}
+
+
+  export default onItemClick
