@@ -4,6 +4,8 @@
   left: 0;
   width: 100%;
   height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .backdrop.is-hidden {
@@ -135,6 +137,8 @@
   font-size: 12px;
   cursor: pointer;
 
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
   &:hover {
     border: none;
     background-color: #ff6b01;
@@ -164,21 +168,95 @@
 }
 
 .modal-btn-close {
-  display: block;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 7px;
+  right: 4px;
   width: 30px;
   height: 30px;
 
-  color: #000000;
-  // background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background-color: #fff;
   border: none;
+
+  color: #000000;
   cursor: pointer;
+
+  @media screen and (min-width: 1024px) {
+    top: 12px;
+    right: 10px;
+  }
 }
 
 .modal-icon {
-  fill: black;
-  width: 12px;
-  height: 12px;
+  width: 70px;
+  height: 70px;
+}
+
+.modal-trailer {
+  position: absolute;
+  top: 210px;
+  z-index: 100;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+
+  display: none;
+
+  border: none;
+  font-size: 13px;
+
+  @media screen and (min-width: 768px) {
+    top: 210px;
+    right: 290px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    top: 282px;
+    right: 407px;
+  }
+}
+
+.modal-trailer:hover .modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-pictures:hover .modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-image-wrapper:hover > .modal-trailer {
+  display: block;
+  background-color: transparent;
+}
+
+.modal-pictures {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.icon-play {
+  fill: red;
+
+  @media screen and (min-width: 1024px) {
+    width: 100px;
+    height: 100px;
+  }
 }
