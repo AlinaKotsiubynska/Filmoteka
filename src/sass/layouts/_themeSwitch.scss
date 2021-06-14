@@ -1,0 +1,32 @@
+body.light-theme {
+  background-color: #fff;
+}
+
+body.dark-theme {
+  background-color: #333333;
+
+  & .gallery-card-title {
+    color: rgba(213, 213, 213, 0.824);
+  }
+}
+.theme-switch {
+  position: static;
+}
+
+.theme-switch__control {
+  width: 50px;
+  height: 25px;
+}
+
+.theme-switch__marker {
+  width: 21px;
+  height: 21px;
+  z-index: 0;
+}
+.theme-switch__toggle:checked ~ .theme-switch__marker {
+  transform: translateX(25px);
+}
+
+.theme-switch__track {
+  z-index: 0;
+}

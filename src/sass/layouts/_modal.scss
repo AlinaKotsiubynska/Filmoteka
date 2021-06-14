@@ -21,9 +21,11 @@
 
   background-color: #ffffff;
 
-  min-width: 280px;
+  min-width: 300px;
   min-height: 958px;
   padding: 48px 20px;
+  margin: 1rem 0;
+  z-index: 9999999;
 }
 
 .modal-img {
@@ -40,7 +42,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
 
-    width: 618px;
+    width: 700px;
     min-height: 562px;
     padding: 42px 28px;
   }
@@ -127,6 +129,7 @@
 
 .modal-button {
   width: 112px;
+  height: 44px;
   display: block;
 
   border-radius: 5px;
@@ -140,7 +143,7 @@
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    border: none;
+    border-color: transparent;
     background-color: #ff6b01;
     color: #ffffff;
   }
@@ -148,12 +151,16 @@
 
 .btn-add-watch {
   margin-right: 10px;
-  padding: 3px 8px;
+  // padding: 3px 8px;
+
+  @media screen and (min-width: 768px) {
+    margin-right: 25px;
+  }
 }
 
-.btn-add-queue {
-  padding: 14px 8px;
-}
+// .btn-add-queue {
+//   padding: 14px 8px;
+// }
 
 .modal-button-container {
   display: flex;
@@ -197,8 +204,8 @@
 
 .modal-trailer {
   position: absolute;
-  top: 210px;
-  z-index: 100;
+  top: 166px;
+  z-index: 1070;
   margin-left: auto;
   margin-right: auto;
   left: 0;
@@ -209,20 +216,17 @@
 
   border: none;
   font-size: 13px;
+  background-color: transparent;
 
   @media screen and (min-width: 768px) {
-    top: 210px;
-    right: 290px;
+    top: 196px;
+    right: 2px;
   }
 
   @media screen and (min-width: 1024px) {
-    top: 282px;
-    right: 407px;
+    top: 244px;
+    right: -8px;
   }
-}
-
-.modal-trailer:hover .modal-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-overlay {
@@ -231,7 +235,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 99;
+  z-index: 1060;
 
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -240,9 +244,12 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-image-wrapper:hover > .modal-trailer {
+.modal-trailer:hover .modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-image-wrapper:hover .modal-trailer {
   display: block;
-  background-color: transparent;
 }
 
 .modal-pictures {
@@ -258,5 +265,9 @@
   @media screen and (min-width: 1024px) {
     width: 100px;
     height: 100px;
+  }
+
+  &:hover .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
   }
 }

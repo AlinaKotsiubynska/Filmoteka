@@ -2,29 +2,33 @@ import modalTemp from '../templates/modal.hbs';
 import FetchFilms from './classFetchFilms.js';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
+import Render from './classRender.js';
 
-const onItemClick = async (event) => {
-const id = event.currentTarget.dataset.id
+const onItemClick = async event => {
+  const id = event.currentTarget.dataset.id;
   await getFilm(id);
 
   openModal(id);
-}
+};
 
 async function getFilm(filmId) {
-  //console.log(filmId)
-    const a = await FetchFilms.getFilmById(filmId);
-    //console.log(a);
+  const a = await FetchFilms.getFilmById(filmId);
   const markup = modalTemp(a);
 
   const modalWrapper = document.querySelector('.modal-wrapper');
-  modalWrapper.innerHTML = "";
-  modalWrapper.insertAdjacentHTML('beforeend', markup)
+  modalWrapper.innerHTML = '';
+  modalWrapper.insertAdjacentHTML('beforeend', markup);
+  modalWrapper.querySelector('.btn-add-watch').addEventListener('click', () => {
+    onWatchBtnClick(a);
+  });
+  modalWrapper.querySelector('.btn-add-queue').addEventListener('click', () => {
+    onQueueBtnClick(a);
+  });
 }
 
 const backdrop = document.querySelector('.backdrop');
 
 function openModal(id) {
-  console.log('id', id)
   backdrop.classList.remove('is-hidden');
   document.body.style.overflow = 'hidden';
 
@@ -32,72 +36,79 @@ function openModal(id) {
   backdrop.addEventListener('click', onBackdropClick);
 
   trailer(id);
-  
+
   toFixedNumber();
 
   onBtnClose();
 }
 
+function onBtnClose() {
+  const btnClose = document.querySelector('.modal-btn-close');
 
-  function onBtnClose() {
-    const btnClose = document.querySelector('.modal-btn-close');
-
-    btnClose.addEventListener('click', () => {
-      backdrop.classList.add('is-hidden');
+  btnClose.addEventListener('click', () => {
+    backdrop.classList.add('is-hidden');
 
     document.body.style.overflow = '';
-    });
-}
-  
-  function onEscPress(e) {
-if (e.code === "Escape") {
-  onCloseModal();
-  }
+  });
 }
 
-  function onCloseModal() {
-  backdrop.classList.add('is-hidden');
-
-  window.removeEventListener("keyup", onEscPress);
-    backdrop.removeEventListener("click", onBackdropClick);
-    
-    document.body.style.overflow = '';
-}
-  
-  function onBackdropClick(e) {
- if (e.target === e.currentTarget) {
+function onEscPress(e) {
+  if (e.code === 'Escape') {
     onCloseModal();
   }
+}
+
+function onCloseModal() {
+  backdrop.classList.add('is-hidden');
+
+  window.removeEventListener('keyup', onEscPress);
+  backdrop.removeEventListener('click', onBackdropClick);
+
+  document.body.style.overflow = '';
+}
+
+function onBackdropClick(e) {
+  if (e.target === e.currentTarget) {
+    onCloseModal();
   }
+}
 
 function toFixedNumber() {
-
-const fixedPopularity = document.querySelector('.js-fixed');
+  const fixedPopularity = document.querySelector('.js-fixed');
   fixedPopularity.textContent = parseFloat(fixedPopularity.textContent).toFixed(1);
 }
 
 function trailer(id) {
-  
   const icon = document.querySelector('.modal-trailer');
 
   icon.addEventListener('click', async () => {
-
     try {
       const response = await FetchFilms.getFilmTrailers(id);
       const trailerKey = await response.results[2].key;
-      
+
       const trailerYoutube = basicLightbox.create(`
 		<iframe width="560" height="315" src='https://www.youtube.com/embed/${trailerKey}' frameborder="0" allowfullscreen></iframe>
-  `)
-    trailerYoutube.show()
+  `);
+      trailerYoutube.show();
+    } catch (error) {
+      console.log(error);
     }
-    catch (error) {
-console.log(error)
-    }
-  
   });
-    
 }
 
+function onWatchBtnClick(filmData) {
+  const filterFilmData = {
+    ...filmData,
+    added: 'watched',
+  };
+  Render.addData(filterFilmData);
+}
+function onQueueBtnClick(filmData) {
+  const filterFilmData = {
+    ...filmData,
+    added: 'queue',
+  };
+  Render.addData(filterFilmData);
+}
 
-  export default onItemClick
+export default onItemClick;

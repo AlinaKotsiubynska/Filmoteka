@@ -48,7 +48,9 @@ function closeModal() {
 }
 
 function submitHandler(e) {
+  console.log(e);
   e.preventDefault();
+  console.log(e);
   const email = document.querySelector('.email').value;
   const password = document.querySelector('.password').value;
   ClassAuth.getToken(email, password);
