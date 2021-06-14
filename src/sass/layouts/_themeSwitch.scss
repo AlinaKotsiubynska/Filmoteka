@@ -25,3 +25,7 @@ body.dark-theme {
 .theme-switch__toggle:checked ~ .theme-switch__marker {
   transform: translateX(25px);
 }
+
+.theme-switch__track {
+  z-index: 0;
+}
