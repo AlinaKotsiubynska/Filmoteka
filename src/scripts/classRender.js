@@ -56,7 +56,9 @@ class RenderData {
         this.renderForAuth(data);
       })
       .catch(err => {
-        document.querySelector('.js-lib-gallery-container').innerHTML = 'Фильмов нет';
+        if (document.querySelector('.js-lib-gallery-container')) {
+          document.querySelector('.js-lib-gallery-container').innerHTML = 'Фильмов нет';
+        }
       });
   }
   addData(film) {
