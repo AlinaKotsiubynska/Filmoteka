@@ -7,3 +7,4 @@ import './scripts/pagination.js';
 import './scripts/headerButtonServise.js';
 import './scripts/authForm.js';
 import './scripts/switchTheme.js';
+import './scripts/arrowUp.js';
