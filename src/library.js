@@ -4,3 +4,4 @@ import './scripts/apiService.js';
 import './scripts/modal.js';
 import './scripts/teamCard.js';
 import './scripts/pagination.js';
+import './scripts/headerButtonServise.js';
