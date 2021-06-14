@@ -1,59 +1,30 @@
 import Auth from './classAuth.js';
-import authForm from '../templates/login.hbs';
 const ClassAuth = new Auth();
 
-const header = document.querySelector('header');
 const loginBtn = document.getElementById('login');
-
+const modalAuth = document.getElementById('modal-auth')
+const form = document.querySelector('.auth-form');
+const closeBtn = document.getElementById('auth-cancel')
 
 loginBtn.addEventListener('click', openAuthForm);
-// const modalAuth = document.getElementById('modal-auth');
-// const closeBtn = document.getElementById('auth-cancel')
-const modalAuth = createLoginModal();
-
-function createLoginModal() {
-  const modal = document.createElement('div');
-  modal.id = 'modal-auth';
-  modal.classList.add('section');
-  modal.insertAdjacentHTML('afterbegin', authForm());
-  return modal
-}
-
-// loginBtn.addEventListener('click', openAuthForm);
-// closeBtn.addEventListener('click', closeModal);
-// modalAuth.addEventListener('click', (e) => {
-//     if(e.currentTarget === e.target) {
-//     closeModal()
-//       }
-// })
-
+form.addEventListener('submit', submitHandler);
+closeBtn.addEventListener('click', closeModal);
+modalAuth.addEventListener('click', (e) => {
+  if(e.target === document.querySelector('.backdrop')) {
+  closeModal()
+    }
+})
 
 function openAuthForm() {
-  const modal = header.appendChild(modalAuth);
-  console.log(modal);
-  // header.insertAdjacentHTML('afterend', authForm);
-  console.log(document.querySelector('.auth-form'));
-  document.querySelector('.auth-form').addEventListener('submit', submitHandler);
-  const closeBtn = document.getElementById('auth-cancel');
-  closeBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => {
-    if(e.currentTarget === e.target) {
-    closeModal()
-      }
-  })
+  modalAuth.classList.remove('is-hidden')
 }
 
 function closeModal() {
-  modalAuth.remove();
+  modalAuth.classList.add('is-hidden')
 }
 
 function submitHandler(e) {
-  console.log(e);
   e.preventDefault();
-  console.log(e);
-  const email = document.querySelector('.email').value;
-  const password = document.querySelector('.password').value;
-  ClassAuth.getToken(email, password);
+  ClassAuth.getToken(form['user-email'].value, form['user-password'].value);
   closeModal()  
-  // modalAuth.addEventListener('click', closeModal);
 }

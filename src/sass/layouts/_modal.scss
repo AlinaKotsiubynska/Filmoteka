@@ -14,18 +14,20 @@
 }
 
 .modal-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  // transform-origin: top left;
 
   background-color: #ffffff;
 
   min-width: 300px;
   min-height: 958px;
   padding: 48px 20px;
-  margin: 1rem 0;
-  z-index: 9999999;
+  margin: 1rem auto;
+  // z-index: 9999999;
 }
 
 .modal-img {
@@ -45,6 +47,7 @@
     width: 700px;
     min-height: 562px;
     padding: 42px 28px;
+    margin: 2rem auto;
   }
 
   .modal-image-wrapper {
