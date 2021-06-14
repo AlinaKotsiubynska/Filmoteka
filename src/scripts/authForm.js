@@ -1,30 +1,12 @@
 import Auth from './classAuth.js';
+import authForm from '../templates/login.hbs';
 const ClassAuth = new Auth();
 
 
 const header = document.querySelector('header');
-console.log(header.appendChild());
 const loginBtn = document.getElementById('login');
-const authForm = `
-<div id="modal-auth" class="backdrop section">
-  <div class="auth-modal-container modal-container">
-    <form action="#" name="user-auth" class="auth-form">
-      <fieldset class="auth-form-inputs">
-        <label> Email
-          <input class="email" type="email" name="user-email" placeholder="Enter email">
-        </label>
-        <label> Password
-          <input class="password" type="text" name="user-password" placeholder="Enter password">
-        </label>
-      </fieldset>
-      <div>
-        <button type="submit">Submit</button>
-        <button id="auth-cancel" type="button">Cancel</button>
-      </div>
-      
-    </form>
-  </div>
-</div>`;
+
+
 
 
 loginBtn.addEventListener('click', openAuthForm);
@@ -36,16 +18,7 @@ function createLoginModal() {
   const modal = document.createElement('div');
   modal.id = 'modal-auth';
   modal.classList.add('backdrop', 'section');
-  modal.insertAdjacentHTML('afterbegin', authForm);
-  console.log(modal);
-  // const closeBtn = modal.getElementById('auth-cancel');
-  // 
-  // closeBtn.addEventListener('click', closeModal);
-  // modal.addEventListener('click', (e) => {
-  //   if(e.currentTarget === e.target) {
-  //   closeModal()
-  //     }
-  // })
+  modal.insertAdjacentHTML('afterbegin', authForm());
   return modal
 }
 
@@ -59,10 +32,18 @@ function createLoginModal() {
 
 
 function openAuthForm() {
-  const modal = header.insertAdjacenElement('afterend', modalAuth);
+  const modal = header.appendChild(modalAuth);
   console.log(modal);
   // header.insertAdjacentHTML('afterend', authForm);
+  console.log(document.querySelector('.auth-form'));
   document.querySelector('.auth-form').addEventListener('submit', submitHandler);
+  const closeBtn = document.getElementById('auth-cancel');
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if(e.currentTarget === e.target) {
+    closeModal()
+      }
+  })
 }
 
 function closeModal() {
