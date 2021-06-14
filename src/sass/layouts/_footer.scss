@@ -35,10 +35,6 @@ $pagination-hover-border-color: transparent;
   background-color: #f7f7f7;
   color: black;
 }
-.page-item:first-child .page-link .active {
-  color: white;
-  background-color: red;
-}
 
 .footer {
   padding-bottom: 30px;
@@ -78,5 +74,23 @@ $pagination-hover-border-color: transparent;
   .lisense-common {
     font-size: 16px;
     line-height: 1.187px;
+  }
+}
+
+.page-item.active .page-link {
+  z-index: 0;
+}
+
+.page-item {
+  margin-right: 10px;
+}
+
+.out-of-range {
+  margin-right: 10px;
+
+  & > .page-link {
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
   }
 }
