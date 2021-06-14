@@ -2,5 +2,10 @@
   &-inputs {
     margin-bottom: 10px;
     display: flex;
+    flex-direction: column;
+  }
+
+  &-buttons {
+    display: flex;
   }
 }

@@ -2,11 +2,8 @@ import Auth from './classAuth.js';
 import authForm from '../templates/login.hbs';
 const ClassAuth = new Auth();
 
-
 const header = document.querySelector('header');
 const loginBtn = document.getElementById('login');
-
-
 
 
 loginBtn.addEventListener('click', openAuthForm);
@@ -17,7 +14,7 @@ const modalAuth = createLoginModal();
 function createLoginModal() {
   const modal = document.createElement('div');
   modal.id = 'modal-auth';
-  modal.classList.add('backdrop', 'section');
+  modal.classList.add('section');
   modal.insertAdjacentHTML('afterbegin', authForm());
   return modal
 }
