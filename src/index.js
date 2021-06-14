@@ -6,3 +6,4 @@ import './scripts/modal';
 import './scripts/teamCard.js';
 import './scripts/pagination.js';
 import './scripts/authForm.js';
+import './scripts/switchTheme';
