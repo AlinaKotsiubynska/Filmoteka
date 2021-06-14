@@ -1,6 +1,52 @@
 .auth-form {
+  &-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
   &-inputs {
-    margin-bottom: 10px;
+    margin: 20px 0 40px;
     display: flex;
+    flex-direction: column;
+  }
+
+  &-buttons {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+.auth-modal-container {
+  display: block;
+  min-height: unset;
+  padding: 50px 150px;
+}
+
+.label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 10px 5px 5px;
+}
+
+.input {
+  width: 70%;
+  padding: 10px 5px 5px;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+@media screen and (max-width: 767px) {
+  .auth-modal-container {
+    margin: 3rem auto;
+    padding: 30px 20px 60px;
+  }
+
+  .label {
+    flex-direction: column;
+  }
+
+  .input {
+    width: 100%;
   }
 }
