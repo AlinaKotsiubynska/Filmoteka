@@ -17,9 +17,7 @@ class RenderData {
       this.containerRef.innerHTML = '';
       this.containerRef.insertAdjacentHTML('beforeend', markup);
       this.addEventListeners(normalizeData);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch {}
   }
   async getRenderData(data) {
     const asyncData = await data;
@@ -47,24 +45,51 @@ class RenderData {
     return genreArr;
   }
   rederWithAuth() {
-    const tokenId = localStorage.getItem('id');
-    fetch(`https://auth-filmoteka-default-rtdb.europe-west1.firebasedatabase.app/films.json?auth=${tokenId}`)
-      .then(res => res.json())
-      .then(d => {
-        console.log(Object.values(d));
-        const libGalRef = document.querySelector('.js-lib-gallery-container');
-        const markup = libGalleryListTemp(Object.values(d));
-        libGalRef.insertAdjacentHTML('beforeend', markup);
+    this.fetchWithToken()
+      .then(data => {
+        const keys = Object.keys(data);
+        if (keys[0] === 'error') {
+          document.querySelector('.js-lib-gallery-container').innerHTML = 'Вы не авторизированы';
+          localStorage.removeItem('id');
+          return;
+        }
+        this.renderForAuth(data);
+      })
+      .catch(err => {
+        if (document.querySelector('.js-lib-gallery-container')) {
+          document.querySelector('.js-lib-gallery-container').innerHTML = 'Фильмов нет';
+        }
       });
   }
   addData(film) {
+    this.fetchWithToken(film);
+  }
+  renderWatched() {
+    this.fetchWithToken().then(data => this.renderOnClick(data, 'watched'));
+  }
+  renderQueue() {
+    this.fetchWithToken().then(data => this.renderOnClick(data, 'queue'));
+  }
+  renderOnClick(data, lebel) {
+    const films = Object.values(data);
+    const filterFilm = films.filter(el => el.added === lebel);
+    this.renderForAuth(filterFilm);
+  }
+  fetchWithToken(film) {
     const tokenId = localStorage.getItem('id');
-    fetch(
-      `https://auth-filmoteka-default-rtdb.europe-west1.firebasedatabase.app/films.json?auth=${tokenId}`,
-      options.addFilm(film),
-    )
-      .then(res => res.json())
-      .then(d => console.log(d));
+    if (!film) {
+      return fetch(`${options.fetchUrl}?auth=${tokenId}`).then(res => res.json());
+    } else {
+      fetch(`${options.fetchUrl}?auth=${tokenId}`, options.addFilm(film)).catch(err => console.log(err));
+    }
+  }
+  renderForAuth(data) {
+    const arrayData = Object.values(data);
+    const unique = Array.from(new Set(arrayData.map(JSON.stringify))).map(JSON.parse);
+    const libGalRef = document.querySelector('.js-lib-gallery-container');
+    const markup = libGalleryListTemp(unique);
+    libGalRef.innerHTML = '';
+    libGalRef.insertAdjacentHTML('beforeend', markup);
   }
 
   addEventListeners() {
@@ -76,15 +101,16 @@ class RenderData {
   }
 }
 
-//принимает шаблон hbs и СЕЛЕКТОР контейнера в котором будет рендериться
-//будет переиспользоваться так же в избранном
 const genresNames = GenresNames.getGenres();
 const films = GenresNames.getTrendingFilms();
 const RenderGallery = new RenderData(galleryListTemp, '.js-gallery-container', genresNames);
 if (localStorage.getItem('id')) {
   RenderGallery.rederWithAuth();
 } else {
-  RenderGallery.render(films);
+  try {
+    document.querySelector('.js-lib-gallery-container').innerHTML = 'Вы не авторизированы';
+    RenderGallery.render(films);
+  } catch {}
 }
 
 export default new RenderData(galleryListTemp, '.js-gallery-container', genresNames);

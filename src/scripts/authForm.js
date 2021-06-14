@@ -8,10 +8,10 @@ const authFotm = `<div id="modal-auth" class="backdrop">
     <form action="#" name="user-auth" class="auth-form">
       <fieldset class="auth-form-inputs">
         <label> Email
-          <input class="email" type="email" name="user-email" placeholder="Enter email">
+          <input class="email" type="email" name="user-email" placeholder="Enter email" value="19tomat@gmail.com">
         </label>
         <label> Password
-          <input class="password" type="text" name="user-password" placeholder="Enter password">
+          <input class="password" type="text" name="user-password" placeholder="Enter password" value="123456">
         </label>
       </fieldset>
       <div>
@@ -35,7 +35,9 @@ function closeModal(e) {
 }
 
 function submitHandler(e) {
+  console.log(e);
   e.preventDefault();
+  console.log(e);
   const email = document.querySelector('.email').value;
   const password = document.querySelector('.password').value;
   ClassAuth.getToken(email, password);
