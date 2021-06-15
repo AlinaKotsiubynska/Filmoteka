@@ -3,6 +3,7 @@ import FetchFilms from './classFetchFilms.js';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import Render from './classRender.js';
+//import firebase from './firebase.js'
 
 const onItemClick = async event => {
   const id = event.currentTarget.dataset.id;
@@ -12,17 +13,27 @@ const onItemClick = async event => {
 };
 
 async function getFilm(filmId) {
-  const a = await FetchFilms.getFilmById(filmId);
-  const markup = modalTemp(a);
+  const current = document.querySelector('.current');
+  const page = current.href;
+  let film = {};
+
+  if (page.includes('index')) {
+    film = await FetchFilms.getFilmById(filmId);
+  } else {
+    film = await firebase.getObject(filmId);
+  }
+
+ 
+  const markup = modalTemp(film);
 
   const modalWrapper = document.querySelector('.modal-wrapper');
   modalWrapper.innerHTML = '';
   modalWrapper.insertAdjacentHTML('beforeend', markup);
   modalWrapper.querySelector('.btn-add-watch').addEventListener('click', () => {
-    onWatchBtnClick(a);
+    onWatchBtnClick(film, filmId);
   });
   modalWrapper.querySelector('.btn-add-queue').addEventListener('click', () => {
-    onQueueBtnClick(a);
+    onQueueBtnClick(film, filmId);
   });
 }
 
@@ -83,45 +94,46 @@ function trailer(id) {
 
   icon.addEventListener('click', async () => {
     try {
-      const response = await FetchFilms.getFilmTrailers(id);
-      console.log(response);
-      let trailerKey = await response.results[0].key;
-      console.log(trailerKey);
+      const trailerUrl = await postData(id);
 
-      if (id === '581726') {
-        trailerKey = await response.results[2].key;
-      }
-      if (id === '423108') {
-        trailerKey = await response.results[5].key;
-      }
-
-             const trailerYoutube = basicLightbox.create(`
-		<iframe width="560" height="315" src='https://www.youtube.com/embed/${trailerKey}' frameborder="0" allowfullscreen></iframe>
+      const trailerYoutube = basicLightbox.create(`
+		<iframe width="560" height="315" src=${trailerUrl} frameborder="0" allowfullscreen></iframe>
   `);
         trailerYoutube.show();
       
     } catch (error) {
       console.log(error);
-        // const playTrailer = document.querySelector('.modal-overlay');
-        //  console.log(playTrailer);
-        //  playTrailer.style.display = 'none';
     }
   });
 }
 
-function onWatchBtnClick(filmData) {
+async function onWatchBtnClick(filmData, filmId) {
   const filterFilmData = {
     ...filmData,
     added: 'watched',
+    trailer: await postData(filmId),
   };
   Render.addData(filterFilmData);
 }
-function onQueueBtnClick(filmData) {
+async function onQueueBtnClick(filmData, filmId) {
   const filterFilmData = {
     ...filmData,
     added: 'queue',
+    trailer: await postData(filmId),
   };
   Render.addData(filterFilmData);
 }
+async function postData(filmId) {
+  const response = await FetchFilms.getFilmTrailers(filmId);
+  let trailerKey = await response.results[0].key;
 
+if (filmId === '581726') {
+        trailerKey = await response.results[2].key;
+      }
+      if (filmId === '423108') {
+        trailerKey = await response.results[5].key;
+      }
+
+  return `https://www.youtube.com/embed/${trailerKey}`;
+}
 export default onItemClick;
