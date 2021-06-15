@@ -1,4 +1,6 @@
 import options from './baseSettingsClassAuth.js';
+import firebase from './firebase.js'
+
 
 class Auth {
   constructor() {}
@@ -8,7 +10,10 @@ class Auth {
       .then(data => data)
       .then(token => localStorage.setItem('id', token.idToken))
       .catch(err => console.log(err));
+    
+      firebase.auth().signInWithEmailAndPassword(email, password)
   }
+
 }
 
 export default Auth;
