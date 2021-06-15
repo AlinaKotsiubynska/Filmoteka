@@ -53,15 +53,27 @@ class Firebase {
   }
 
   async getObjects() {
-    const userId = localStorage.getItem('userId')
-    console.log(userId);
     try {
-      const objectsList = await this.db.ref().child(userId).child('films').get().then(r => console.log(r.val()));
+      const userId = localStorage.getItem('userId')
+      console.log(userId, typeof userId);
+      const ref = this.db.ref()
+      console.log(ref);
+      const objectsList = await ref.child(userId).child('films').get()
       // const objectsList = await this.db.ref().child(userId).get();
-      // const parseObj = await objectsList.val();
-      // console.log(objectsList, parseObj);
+      const parseObj = await objectsList.val();
+      console.log(objectsList, parseObj);
       // console.log(Object.values(parseObj))
       // return Object.values(parseObj);
+//       const dbRef = firebase.database().ref();
+// dbRef.child("users").child(userId).get().then((snapshot) => {
+//   if (snapshot.exists()) {
+//     console.log(snapshot.val());
+//   } else {
+//     console.log("No data available");
+//   }
+// }).catch((error) => {
+//   console.error(error);
+// });
     } catch (error) {
       console.error(error);
     }
