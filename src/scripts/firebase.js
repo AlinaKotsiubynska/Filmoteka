@@ -54,11 +54,11 @@ class Firebase {
 
   async getObjects() {
     try {
-      const userId = localStorage.getItem('userId')
-      console.log(userId, typeof userId);
+      // const userId = localStorage.getItem('userId')
+      // console.log(userId, typeof userId);
       const ref = this.db.ref()
       console.log(ref);
-      const objectsList = await ref.child(userId).child('films').get()
+      const objectsList = await ref.child('bIzNhN1E9LehwYpgfFWxmhArAuW2').child('films').get()
       // const objectsList = await this.db.ref().child(userId).get();
       const parseObj = await objectsList.val();
       console.log(objectsList, parseObj);
