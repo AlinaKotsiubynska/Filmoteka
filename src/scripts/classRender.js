@@ -4,6 +4,7 @@ import GenresNames from './classFetchFilms.js';
 import onItemClick from './modal';
 import options from './baseSettingsClassAuth.js';
 
+
 class RenderData {
   constructor(temp, selector, genres) {
     this.temp = temp;
@@ -45,6 +46,7 @@ class RenderData {
     return genreArr;
   }
   rederWithAuth() {
+    
     this.fetchWithToken()
       .then(data => {
         const keys = Object.keys(data);

@@ -3,6 +3,7 @@ import FetchFilms from './classFetchFilms.js';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import Render from './classRender.js';
+import firebase from './firebase.js'
 
 const onItemClick = async event => {
   const id = event.currentTarget.dataset.id;
@@ -19,10 +20,10 @@ async function getFilm(filmId) {
   modalWrapper.innerHTML = '';
   modalWrapper.insertAdjacentHTML('beforeend', markup);
   modalWrapper.querySelector('.btn-add-watch').addEventListener('click', () => {
-    onWatchBtnClick(a);
+    onWatchBtnClick(a, filmId);
   });
   modalWrapper.querySelector('.btn-add-queue').addEventListener('click', () => {
-    onQueueBtnClick(a);
+    onQueueBtnClick(a, filmId);
   });
 }
 
@@ -96,19 +97,22 @@ function trailer(id) {
   });
 }
 
-function onWatchBtnClick(filmData) {
+function onWatchBtnClick(filmData, filmId) {
   const filterFilmData = {
     ...filmData,
     added: 'watched',
   };
-  Render.addData(filterFilmData);
+  firebase.database().ref('films/' + filmId).set(filterFilmData);
+  // Render.addData(filterFilmData);
 }
-function onQueueBtnClick(filmData) {
+function onQueueBtnClick(filmData, filmId) {
   const filterFilmData = {
     ...filmData,
     added: 'queue',
   };
-  Render.addData(filterFilmData);
+  firebase.database().ref('films/' + filmId).set(filterFilmData);
 }
+  // Render.addData(filterFilmData);
+// }
 
 export default onItemClick;
