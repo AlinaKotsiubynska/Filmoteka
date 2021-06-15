@@ -2,8 +2,7 @@ import modalTemp from '../templates/modal.hbs';
 import FetchFilms from './classFetchFilms.js';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
-import Render from './classRender.js';
-import firebase from './firebase.js'
+import firebase from './firebase.js';
 
 const onItemClick = async event => {
   const id = event.currentTarget.dataset.id;
@@ -102,9 +101,8 @@ async function onWatchBtnClick(filmData, filmId) {
     added: 'watched',
     trailer: await postData(filmId),
   };
-  
-  firebase.addObject(filmId, filterFilmData)
-  // Render.addData(filterFilmData);
+
+  firebase.addObject(filmId, filterFilmData);
 }
 async function onQueueBtnClick(filmData, filmId) {
   const filterFilmData = {
@@ -112,8 +110,7 @@ async function onQueueBtnClick(filmData, filmId) {
     added: 'queue',
     trailer: await postData(filmId),
   };
-  firebase.addObject(filmId, filterFilmData)
-
+  firebase.addObject(filmId, filterFilmData);
 }
 async function postData(filmId) {
   const response = await FetchFilms.getFilmTrailers(filmId);

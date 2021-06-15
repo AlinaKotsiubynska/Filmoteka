@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
-import fetch from './classFetchFilms'
+import fetch from './classFetchFilms';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBRhX5RMVSwrYfBPrYJffmZ8SgEdrIcXCI',
@@ -24,7 +24,7 @@ class Firebase {
 
   onAuthStateChanged(succes = console.log, error = console.log) {
     this.auth.onAuthStateChanged(user => {
-      localStorage.setItem('userId', user.uid)
+      localStorage.setItem('userId', user.uid);
       if (user) {
         succes(user);
       } else {
@@ -34,7 +34,7 @@ class Firebase {
   }
 
   signOut() {
-    this.auth.signOut;
+    this.auth.signOut();
   }
 
   signIn(email, password) {
@@ -45,23 +45,19 @@ class Firebase {
     this.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  
-
   addObject(id, obj) {
-    const userId = localStorage.getItem('userId')
+    const userId = localStorage.getItem('userId');
     this.db.ref(`users/${userId}/films/${id}`).set(obj);
   }
 
-  async getObjects() {
-    const userId = localStorage.getItem('userId')
-    console.log(userId);
+  async getObjects(status) {
+    const userId = localStorage.getItem('userId');
     try {
-      const objectsList = await this.db.ref().child(userId).child('films').get().then(r => console.log(r.val()));
-      // const objectsList = await this.db.ref().child(userId).get();
-      // const parseObj = await objectsList.val();
-      // console.log(objectsList, parseObj);
-      // console.log(Object.values(parseObj))
-      // return Object.values(parseObj);
+      const objectsList = await this.db.ref().child('users').child(userId).child('films').get();
+      const parseObj = await objectsList.val();
+      const arrayFims = Object.values(parseObj);
+      const sortFilms = arrayFims.filter(el => el.added === status);
+      return sortFilms;
     } catch (error) {
       console.error(error);
     }
@@ -117,10 +113,10 @@ const myBase = new Firebase();
 // });
 
 // fetch.getFilmById(785522).then(r => {
-  
+
 //   console.log(localStorage.getItem('userId'));
 //   myBase.addObject(r.id, r)
 //   console.log(r.id, r);
 // });
-myBase.getObjects()
+myBase.getObjects('queue');
 export default myBase;
