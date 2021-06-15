@@ -1,4 +1,4 @@
-import './sass/main.scss';
+import './sass/library.scss';
 import './scripts/classRender.js';
 import './scripts/apiService.js';
 import './scripts/modal.js';
