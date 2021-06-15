@@ -1,11 +1,9 @@
 import galleryListTemp from '../templates/gallery.hbs';
-
 import GenresNames from './classFetchFilms.js';
 import onItemClick from './modal';
-import Firebase from './firebase.js';
 
 class RenderData {
-  constructor(genres) {
+  constructor() {
     this.temp = galleryListTemp;
     this.containerRef = document.querySelector('.js-gallery-container');
     this.genres = GenresNames.getGenres();
