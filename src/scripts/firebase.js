@@ -1,15 +1,15 @@
-import firebase from "firebase/app";
-import "firebase/database";
-import "firebase/auth";
+import firebase from 'firebase/app';
+import 'firebase/database';
+import 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBRhX5RMVSwrYfBPrYJffmZ8SgEdrIcXCI",
-  authDomain: "auth-filmoteka.firebaseapp.com",
-  databaseURL: "https://auth-filmoteka-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "auth-filmoteka",
-  storageBucket: "auth-filmoteka.appspot.com",
-  messagingSenderId: "980393981976",
-  appId: "1:980393981976:web:e61aee84f208009d0d2b6d"
+  apiKey: 'AIzaSyBRhX5RMVSwrYfBPrYJffmZ8SgEdrIcXCI',
+  authDomain: 'auth-filmoteka.firebaseapp.com',
+  databaseURL: 'https://auth-filmoteka-default-rtdb.europe-west1.firebasedatabase.app',
+  projectId: 'auth-filmoteka',
+  storageBucket: 'auth-filmoteka.appspot.com',
+  messagingSenderId: '980393981976',
+  appId: '1:980393981976:web:e61aee84f208009d0d2b6d',
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -19,57 +19,55 @@ class Firebase {
     // firebase.initializeApp(firebaseConfig);
     this.auth = firebase.auth();
     this.db = firebase.database();
-    this.onAuthStateChanged(console.log, console.log)
+    this.onAuthStateChanged(console.log, console.log);
   }
-  
+
   onAuthStateChanged(succes, error) {
     this.auth.onAuthStateChanged(user => {
       if (user) {
-        succes(user)
+        succes(user);
       } else {
-        error(user)
+        error(user);
       }
-    })
+    });
   }
 
   signOut() {
-    this.auth.signOut
+    this.auth.signOut;
   }
 
   signIn(email, password) {
-    this.auth.signInWithEmailAndPassword(email, password)
+    this.auth.signInWithEmailAndPassword(email, password);
   }
 
   createUser(email, password) {
-    this.auth.createUserWithEmailAndPassword(email, password)
+    this.auth.createUserWithEmailAndPassword(email, password);
   }
 
   addObject(refKey = 'films', id, obj) {
-    this.db.ref(`${refKey}/${id}`).set(obj)
+    this.db.ref(`${refKey}/${id}`).set(obj);
   }
 
   async getObjects(refKey = 'films') {
     try {
-      const objectsList = await this.db.ref().child(refKey).get()
-    return objectsList
+      const objectsList = await this.db.ref().child(refKey).get();
+      const parseObj = await objectsList.val();
+      return Object.values(parseObj);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
 
   async getObject(id, refKey) {
-    const objects = (await this.getObjects(refKey)).val()
-    const object = await objects[id];
-    return object
+    const arrayObjects = await this.getObjects(refKey);
+    const object = arrayObjects.find(el => el.id === id);
+    return object;
   }
 }
 
 // firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
-const db = firebase.database()
-
-
-
+const db = firebase.database();
 
 // function writeUserData(userId, name, email, imageUrl = '') {
 //   firebase.database().ref('users/' + userId).set({
@@ -103,6 +101,6 @@ const db = firebase.database()
 //   console.error(error);
 // });
 const myBase = new Firebase();
-myBase.getObject(550).then(r => console.log('filmId 550 :', r))
+myBase.getObject(550).then(r => console.log('filmId 550 :', r));
 
-export default firebase
+export default myBase;
