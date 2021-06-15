@@ -19,10 +19,10 @@ async function getFilm(filmId) {
   modalWrapper.innerHTML = '';
   modalWrapper.insertAdjacentHTML('beforeend', markup);
   modalWrapper.querySelector('.btn-add-watch').addEventListener('click', () => {
-    onWatchBtnClick(a);
+    onWatchBtnClick(a, filmId);
   });
   modalWrapper.querySelector('.btn-add-queue').addEventListener('click', () => {
-    onQueueBtnClick(a);
+    onQueueBtnClick(a, filmId);
   });
 }
 
@@ -83,11 +83,10 @@ function trailer(id) {
 
   icon.addEventListener('click', async () => {
     try {
-      const response = await FetchFilms.getFilmTrailers(id);
-      const trailerKey = await response.results[2].key;
+      const trailerUrl = await postData(id);
 
       const trailerYoutube = basicLightbox.create(`
-		<iframe width="560" height="315" src='https://www.youtube.com/embed/${trailerKey}' frameborder="0" allowfullscreen></iframe>
+		<iframe width="560" height="315" src=${trailerUrl} frameborder="0" allowfullscreen></iframe>
   `);
       trailerYoutube.show();
     } catch (error) {
@@ -96,19 +95,25 @@ function trailer(id) {
   });
 }
 
-function onWatchBtnClick(filmData) {
+async function onWatchBtnClick(filmData, filmId) {
   const filterFilmData = {
     ...filmData,
     added: 'watched',
+    trailer: await postData(filmId),
   };
   Render.addData(filterFilmData);
 }
-function onQueueBtnClick(filmData) {
+async function onQueueBtnClick(filmData, filmId) {
   const filterFilmData = {
     ...filmData,
     added: 'queue',
+    trailer: await postData(filmId),
   };
   Render.addData(filterFilmData);
 }
-
+async function postData(filmId) {
+  const response = await FetchFilms.getFilmTrailers(filmId);
+  const trailerKey = await response.results[0].key;
+  return `https://www.youtube.com/embed/${trailerKey}`;
+}
 export default onItemClick;
