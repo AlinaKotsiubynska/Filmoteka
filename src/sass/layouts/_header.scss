@@ -1,6 +1,5 @@
 .header {
-  position: relative;
-  height: 230px;
+  min-height: 230px;
   background-color: rgba(0, 0, 0, 0.56);
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
     url('../images/header/bghome-desk.jpg');
@@ -55,11 +54,6 @@
 
     &-icon {
       margin-right: 15px;
-
-      // @media screen and (min-width: 768px) {
-
-      //   justify-content: center;
-      // }
     }
 
     &-text {
@@ -76,6 +70,10 @@
         color: #ffffff;
 
         transition: color 250ms cubic-bezier(0.77, 0, 0.175, 1);
+
+        @media screen and (min-width: 1024px) {
+          margin-right: 35px;
+        }
 
         &:hover,
         &:focus {
@@ -107,14 +105,19 @@
       font-weight: 500;
       font-size: 12px;
       line-height: 1.167;
+      margin-right: 10px;
 
-      &:not(:last-child) {
+      @media screen and (min-width: 1024px) {
         margin-right: 15px;
       }
 
-      @media screen and (min-width: 1024px) {
-        position: relative;
-      }
+      // &:not(:last-child) {
+      //   margin-right: 15px;
+      // }
+
+      // &:last-child {
+      //   margin-right: 10px;
+      // }
     }
 
     &-link {
@@ -150,35 +153,32 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 160px;
-  // margin: 0 auto;
-  margin-right: 10px;
+  width: 190px;
+  margin-right: 16px;
 
   @media screen and (min-width: 768px) {
-    width: 180px;
-    // margin-right: 30px;
+    width: 200px;
   }
 
   @media screen and (min-width: 1024px) {
-    width: 336px;
-    // margin-right: 30px;
+    width: 410px;
+    margin-right: 30px;
   }
 }
 
 .search-form {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .search-input {
-  display: block;
+  display: flex;
   background-color: transparent;
   border: none;
   border-bottom: 0.5px solid #ffffff;
   color: #ffffff;
-  width: 336px;
+  width: 190px;
   // padding: 2px 20px;
   font-size: 14px;
   line-height: 1.143;
@@ -189,6 +189,14 @@
     color: #ffffff;
     text-align: left;
     opacity: 0.8;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 200px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 410px;
   }
 }
 
@@ -211,10 +219,10 @@
   }
 }
 
-.inputs-wrapper {
-  position: relative;
-  // width: 100%;
-}
+// .inputs-wrapper {
+//   position: relative;
+//   // width: 100%;
+// }
 
 // .search-icon {
 //   position: absolute;
@@ -229,7 +237,7 @@
 //   cursor: pointer;
 // }
 
-.search-error.is-hidden {
+.search-error {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -242,7 +250,7 @@
 
 .wrapper {
   display: flex;
-  // justify-content: space-between;
+  justify-content: space-between;
   align-items: baseline;
 }
 
