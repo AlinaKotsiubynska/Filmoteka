@@ -16,17 +16,6 @@
         </svg>
       </button>
 
-      <div class="menu-container" id="menu-container" data-menu>
-        <ul class="header-nav-list">
-          <li class="header-nav-list-item">
-            <a href="./index.html" class="current header-nav-list-link">Home</a>
-          </li>
-          <li class="header-nav-list-item">
-            <a href="./library.html" class="header-nav-list-link">My library</a>
-          </li>
-        </ul>
-      </div>
-
       <div class="search">
         <form action="" class="search-form" autocomplete="off" id="search-form">
           <div class="inputs-wrapper">
@@ -42,9 +31,21 @@
       
     </nav>
 
-    <div class="special-btn">
-      <include src="./partials/loginButton.html"></include>
-      <include src="./partials/switchTheme.html"></include>
+    <div class="special">
+      <div class="menu-container" id="menu-container" data-menu>
+        <ul class="header-nav-list">
+          <li class="header-nav-list-item">
+            <a href="./index.html" class="current header-nav-list-link">Home</a>
+          </li>
+          <li class="header-nav-list-item">
+            <a href="./library.html" class="header-nav-list-link">My library</a>
+          </li>
+        </ul>
+
+        <include src="./partials/loginButton.html"></include>
+        <include src="./partials/switchTheme.html"></include>
+      </div>
+      
     </div>
     <include src="./partials/slider.html"></include>
   </div>
