@@ -1,0 +1,23 @@
+.login-btn {
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.167;
+    color: #ffffff;
+    border: none;
+    background-color: transparent;
+    margin-right: 20px;
+
+    &:hover,
+    &:focus {
+      color: #ff6b08;
+    }
+  }
+}

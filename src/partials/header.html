@@ -1,5 +1,5 @@
 <header class="section header">
-  <div class="container wrapper"> 
+  <div class="container wrapper">
     <nav class="header-nav">
       <a class="header-nav-logo" href="./index.html" aria-label="логотип сайта" lang="en">
         <svg class="header-nav-logo-icon" width="24" height="24">
@@ -8,30 +8,46 @@
         <span class="header-nav-logo-text">Filmoteka</span>
       </a>
 
-      <div class="search">
-        <input class="search-input" type="text" name="message" placeholder="Search a movie">
-        <svg class="search-icon">
-          <use href="./images/icons/sprite.svg#icon-search"></use>
-        </svg>
-      </div>
+      <button type="button" class="menu-button" aria-expanded="false" aria-controls="menu-container" data-menu-button>
       
-      <ul class="header-nav-list">
-        <li class="header-nav-list-item">
-          <a href="./index.html" class="current header-nav-list-link">Home</a>
-        </li>
-        <li class="header-nav-list-item">
-          <a href="./library.html" class="header-nav-list-link">My library</a>
-        </li>
-      </ul>
+        <svg width="40" height="40" aria-label="Переключатель мобильного меню">
+          <use class="icon-cross" href="./images/icons/sprite.svg#icon-cross"></use>
+          <use class="icon-menu" href="./images/icons/sprite.svg#icon-menu"></use>
+        </svg>
+      </button>
+
+      <div class="menu-container" id="menu-container" data-menu>
+        <ul class="header-nav-list">
+          <li class="header-nav-list-item">
+            <a href="./index.html" class="current header-nav-list-link">Home</a>
+          </li>
+          <li class="header-nav-list-item">
+            <a href="./library.html" class="header-nav-list-link">My library</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="search">
+        <form action="" class="search-form" autocomplete="off" id="search-form">
+          <div class="inputs-wrapper">
+            <input class="search-input" type="text" name="search" placeholder="Search a movie" />
+            <input class="search-submit" type="submit" name="" value="" />
+            <!-- <svg class="search-icon">
+                      <use href="./images/icons/sprite.svg#icon-search"></use>
+                   </svg> -->
+          </div>
+        </form>
+      </div>
+
+      
     </nav>
 
-    <include src="./partials/loginButton.html"></include>
-    <include src="./partials/switchTheme.html"></include>
+    <div class="special-btn">
+      <include src="./partials/loginButton.html"></include>
+      <include src="./partials/switchTheme.html"></include>
+    </div>
     <include src="./partials/slider.html"></include>
-    
   </div>
 
-  <p class="search-error visually-hidden">
-    Search result not successful. Enter the correct movie name
-  </p>
+  <p class="search-error is-hidden">Search result not successful. Enter the correct movie name</p>
 </header>
