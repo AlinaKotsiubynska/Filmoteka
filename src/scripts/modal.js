@@ -84,14 +84,27 @@ function trailer(id) {
   icon.addEventListener('click', async () => {
     try {
       const response = await FetchFilms.getFilmTrailers(id);
-      const trailerKey = await response.results[2].key;
+      console.log(response);
+      let trailerKey = await response.results[0].key;
+      console.log(trailerKey);
 
-      const trailerYoutube = basicLightbox.create(`
+      if (id === '581726') {
+        trailerKey = await response.results[2].key;
+      }
+      if (id === '423108') {
+        trailerKey = await response.results[5].key;
+      }
+
+             const trailerYoutube = basicLightbox.create(`
 		<iframe width="560" height="315" src='https://www.youtube.com/embed/${trailerKey}' frameborder="0" allowfullscreen></iframe>
   `);
-      trailerYoutube.show();
+        trailerYoutube.show();
+      
     } catch (error) {
       console.log(error);
+        // const playTrailer = document.querySelector('.modal-overlay');
+        //  console.log(playTrailer);
+        //  playTrailer.style.display = 'none';
     }
   });
 }
