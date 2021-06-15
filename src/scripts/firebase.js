@@ -103,5 +103,6 @@ const db = firebase.database()
 //   console.error(error);
 // });
 const myBase = new Firebase();
-myBase.getObject(550)
+myBase.getObject(550).then(r => console.log('filmId 550 :', r))
+
 export default firebase
