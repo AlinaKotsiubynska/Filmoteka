@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
+import fetch from './classFetchFilms'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBRhX5RMVSwrYfBPrYJffmZ8SgEdrIcXCI',
@@ -16,14 +17,14 @@ firebase.initializeApp(firebaseConfig);
 
 class Firebase {
   constructor() {
-    // firebase.initializeApp(firebaseConfig);
     this.auth = firebase.auth();
     this.db = firebase.database();
     this.onAuthStateChanged(console.log, console.log);
   }
 
-  onAuthStateChanged(succes, error) {
+  onAuthStateChanged(succes = console.log, error = console.log) {
     this.auth.onAuthStateChanged(user => {
+      localStorage.setItem('userId', user.uid)
       if (user) {
         succes(user);
       } else {
@@ -44,15 +45,23 @@ class Firebase {
     this.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  addObject(refKey = 'films', id, obj) {
-    this.db.ref(`${refKey}/${id}`).set(obj);
+  
+
+  addObject(id, obj) {
+    const userId = localStorage.getItem('userId')
+    this.db.ref(`users/${userId}/films/${id}`).set(obj);
   }
 
-  async getObjects(refKey = 'films') {
+  async getObjects() {
+    const userId = localStorage.getItem('userId')
+    console.log(userId);
     try {
-      const objectsList = await this.db.ref().child(refKey).get();
-      const parseObj = await objectsList.val();
-      return Object.values(parseObj);
+      const objectsList = await this.db.ref().child(userId).child('films').get().then(r => console.log(r.val()));
+      // const objectsList = await this.db.ref().child(userId).get();
+      // const parseObj = await objectsList.val();
+      // console.log(objectsList, parseObj);
+      // console.log(Object.values(parseObj))
+      // return Object.values(parseObj);
     } catch (error) {
       console.error(error);
     }
@@ -101,6 +110,17 @@ const db = firebase.database();
 //   console.error(error);
 // });
 const myBase = new Firebase();
-myBase.getObject(550).then(r => console.log('filmId 550 :', r));
+// fetch.getFilmById(550).then(r => {
+//   myBase.addObject(r.id, r)
+//   console.log(localStorage.getItem('userId'));
+//   console.log( r.id, r);
+// });
 
+// fetch.getFilmById(785522).then(r => {
+  
+//   console.log(localStorage.getItem('userId'));
+//   myBase.addObject(r.id, r)
+//   console.log(r.id, r);
+// });
+myBase.getObjects()
 export default myBase;

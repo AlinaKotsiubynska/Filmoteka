@@ -11,7 +11,7 @@ class Auth {
       .then(token => localStorage.setItem('id', token.idToken))
       .catch(err => console.log(err));
     
-      firebase.auth().signInWithEmailAndPassword(email, password)
+      firebase.signIn(email, password)
   }
 
 }

@@ -102,7 +102,8 @@ async function onWatchBtnClick(filmData, filmId) {
     added: 'watched',
     trailer: await postData(filmId),
   };
-  firebase.database().ref('films/' + filmId).set(filterFilmData);
+  
+  firebase.addObject(filmId, filterFilmData)
   // Render.addData(filterFilmData);
 }
 async function onQueueBtnClick(filmData, filmId) {
@@ -111,7 +112,8 @@ async function onQueueBtnClick(filmData, filmId) {
     added: 'queue',
     trailer: await postData(filmId),
   };
-  firebase.database().ref('films/' + filmId).set(filterFilmData);
+  firebase.addObject(filmId, filterFilmData)
+
 }
 async function postData(filmId) {
   const response = await FetchFilms.getFilmTrailers(filmId);
