@@ -12,17 +12,26 @@ const onItemClick = async event => {
 };
 
 async function getFilm(filmId) {
-  const a = await FetchFilms.getFilmById(filmId);
-  const markup = modalTemp(a);
+  const current = document.querySelector('.current');
+  const page = current.href;
+  let film = {};
+
+  if (page.includes('index')) {
+    film = await FetchFilms.getFilmById(filmId);
+  } else {
+    film = await firebase.getObject(filmId);
+  }
+
+  const markup = modalTemp(film);
 
   const modalWrapper = document.querySelector('.modal-wrapper');
   modalWrapper.innerHTML = '';
   modalWrapper.insertAdjacentHTML('beforeend', markup);
   modalWrapper.querySelector('.btn-add-watch').addEventListener('click', () => {
-    onWatchBtnClick(a, filmId);
+    onWatchBtnClick(film, filmId);
   });
   modalWrapper.querySelector('.btn-add-queue').addEventListener('click', () => {
-    onQueueBtnClick(a, filmId);
+    onQueueBtnClick(film, filmId);
   });
 }
 
@@ -88,7 +97,8 @@ function trailer(id) {
       const trailerYoutube = basicLightbox.create(`
 		<iframe width="560" height="315" src=${trailerUrl} frameborder="0" allowfullscreen></iframe>
   `);
-      trailerYoutube.show();
+        trailerYoutube.show();
+      
     } catch (error) {
       console.log(error);
     }
@@ -114,7 +124,15 @@ async function onQueueBtnClick(filmData, filmId) {
 }
 async function postData(filmId) {
   const response = await FetchFilms.getFilmTrailers(filmId);
-  const trailerKey = await response.results[0].key;
+  let trailerKey = await response.results[0].key;
+
+  if (filmId === '581726') {
+    trailerKey = await response.results[2].key;
+  }
+  if (filmId === '423108') {
+    trailerKey = await response.results[5].key;
+  }
+
   return `https://www.youtube.com/embed/${trailerKey}`;
 }
 export default onItemClick;

@@ -91,6 +91,7 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 35px;
+  text-transform: uppercase;
 }
 
 .modal-description-categories {
@@ -172,8 +173,10 @@
 .modal-span {
   display: inline-block;
   width: 25px;
+
   text-align: center;
   background-color: #ff6b01;
+  color: #ffffff;
   border-radius: 3px;
 }
 

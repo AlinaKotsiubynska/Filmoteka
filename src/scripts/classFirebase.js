@@ -65,7 +65,7 @@ onAuthChanged(succes, error) {
 
   async getObject(id) {
     const arrayObjects = await this.getObjects();
-    const object = arrayObjects.find(el => el.id === id);
+    const object = arrayObjects.find(el => el.id === Number(id));
     return object;
   }
 }

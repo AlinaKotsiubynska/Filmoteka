@@ -1,6 +1,8 @@
-.gallery-list {
+.gallery-container {
   padding-top: 20px;
   padding-bottom: 40px;
+}
+.gallery-list {
   display: grid;
   gap: 20px;
 }
@@ -49,9 +51,11 @@
   // align-items: flex-start;
 }
 @media screen and (min-width: 768px) {
-  .gallery-list {
+  .gallery-container {
     padding-top: 60px;
     padding-bottom: 50px;
+  }
+  .gallery-list {
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
   }

@@ -27,7 +27,7 @@ class RenderLibrary {
     this.render();
   }
   error() {
-    this.libGalleryRef.innerHTML = 'аторизируйтесь';
+    this.libGalleryRef.innerHTML = 'Please log in to access your library.';
   }
   addEventListeners() {
     document.querySelectorAll('.gallery-card-item').forEach(item =>
