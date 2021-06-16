@@ -1,5 +1,6 @@
 import libGalleryListTemp from '../templates/lib-gallery.hbs';
-import Firebase from './firebase.js';
+import Firebase from './classFirebase.js';
+import onItemClick from './modal';
 
 class RenderLibrary {
   constructor() {
@@ -8,10 +9,11 @@ class RenderLibrary {
   }
   async render(label = 'watched') {
     if (label === 'watched' || label === 'queue') {
-      const films = await Firebase.getObjects(label);
+      const films = await Firebase.getSorted(label);
       const markup = libGalleryListTemp(films);
       this.libGalleryRef.innerHTML = '';
       this.libGalleryRef.insertAdjacentHTML('afterbegin', markup);
+      this.addEventListeners();
     }
   }
   onBtnsClick(event) {
@@ -27,10 +29,17 @@ class RenderLibrary {
   error() {
     this.libGalleryRef.innerHTML = 'аторизируйтесь';
   }
+  addEventListeners() {
+    document.querySelectorAll('.gallery-card-item').forEach(item =>
+      item.addEventListener('click', event => {
+        onItemClick(event);
+      }),
+    );
+  }
 }
 
 const RenderLib = new RenderLibrary();
 const succes = RenderLib.succes.bind(RenderLib);
 const error = RenderLib.error.bind(RenderLib);
 
-Firebase.onAuthStateChanged(succes, error);
+Firebase.onAuthChanged(succes, error);

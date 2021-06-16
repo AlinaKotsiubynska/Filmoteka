@@ -2,7 +2,7 @@ import modalTemp from '../templates/modal.hbs';
 import FetchFilms from './classFetchFilms.js';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
-import firebase from './firebase.js';
+import firebase from './classFirebase.js';
 
 const onItemClick = async event => {
   const id = event.currentTarget.dataset.id;

@@ -1,4 +1,4 @@
-import firebase from './firebase.js'
+import firebase from './classFirebase.js'
 
 const loginBtn = document.getElementById('login');
 const modalAuth = document.getElementById('modal-auth')
