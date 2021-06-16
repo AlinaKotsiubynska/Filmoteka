@@ -12,7 +12,7 @@ form.addEventListener('submit', submitHandler);
 closeBtn.addEventListener('click', closeModal);
 
 modalAuth.addEventListener('click', (e) => {
-  if(e.target === document.querySelector('.backdrop')) {
+  if(e.target === modalAuth) {
   closeModal()
     }
 })
