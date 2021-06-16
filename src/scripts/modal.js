@@ -23,7 +23,6 @@ async function getFilm(filmId) {
     film = await firebase.getObject(filmId);
   }
 
- 
   const markup = modalTemp(film);
 
   const modalWrapper = document.querySelector('.modal-wrapper');
