@@ -32,8 +32,11 @@ $pagination-hover-border-color: transparent;
   color: black;
 }
 .page-item:first-child .page-link {
-  background-color: #f7f7f7;
   color: black;
+}
+.page-item:first-child.active .page-link {
+  color: white;
+  outline: yellow;
 }
 
 .footer {
@@ -79,6 +82,7 @@ $pagination-hover-border-color: transparent;
 
 .page-item.active .page-link {
   z-index: 0;
+  border-color: $pagination-active-bg;
 }
 
 .page-item {
@@ -90,7 +94,7 @@ $pagination-hover-border-color: transparent;
 
   & > .page-link {
     border-radius: 5px;
-    background-color: #333;
-    color: #fff;
+
+    color: black;
   }
 }

@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@popperjs/core": "^2.9.2",
+    "@splidejs/splide": "^2.4.21",
     "axios": "^0.21.1",
     "basiclightbox": "^5.0.4",
     "bootstrap": "^5.0.1",

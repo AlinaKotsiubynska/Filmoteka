@@ -1,0 +1,15 @@
+@import '../../node_modules/@splidejs/splide/dist/css/splide-core.min.css';
+
+.splide__slide.is-active {
+  border: 5px solid #ff6b08;
+}
+
+@media screen and (max-width: 767px) {
+  .splide {
+    display: none;
+  }
+}
+
+.splide {
+  margin-top: 15px;
+}
