@@ -5,8 +5,6 @@ import FilmsAPI from './classFetchFilms.js';
 async function sliderMaker(page) {
   const arrayOfFilms = await FilmsAPI.getTrendingFilms(page);
 
-  console.log(arrayOfFilms);
-
   const markup = sliderTempl(arrayOfFilms.results);
 
   const sliderWrapper = document.querySelector('.splide__list');

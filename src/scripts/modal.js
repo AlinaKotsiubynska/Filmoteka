@@ -7,9 +7,10 @@ import firebase from './classFirebase.js';
 const onItemClick = async event => {
   const id = event.currentTarget.dataset.id;
   await getFilm(id);
-
   openModal(id);
 };
+
+
 
 async function getFilm(filmId) {
   const current = document.querySelector('.current');
@@ -28,9 +29,9 @@ async function getFilm(filmId) {
   const modalWrapper = document.querySelector('.modal-wrapper');
   modalWrapper.innerHTML = '';
   modalWrapper.insertAdjacentHTML('beforeend', markup);
-  if (fetchFilm.id === firebaseFilm?.id) {
-    currentButtonChoice(firebaseFilm);
-  }
+  // if (fetchFilm.id === firebaseFilm?.id) {
+  //   currentButtonChoice(firebaseFilm);
+  // }
   modalWrapper.querySelector('.btn-add-watch').addEventListener('click', () => {
     onWatchBtnClick(film, filmId);
   });
@@ -140,7 +141,6 @@ async function postData(filmId) {
 }
 
 function currentButtonChoice({ added }) {
-  console.log(added);
   const btnWatchRef = document.querySelector('.btn-add-watch');
   const btnQueueRef = document.querySelector('.btn-add-queue');
   if (added === 'watched') {

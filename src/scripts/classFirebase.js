@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import spinner from './spinner';
 import 'firebase/database';
 import 'firebase/auth';
 
@@ -15,12 +16,12 @@ const firebaseConfig = {
 class Firebase {
   constructor(config) {
     firebase.initializeApp(config);
-    this.auth = firebase.auth();
+    this.Auth = firebase.auth();
     this.db = firebase.database();
   }
 
 onAuthChanged(succes, error) {
-  this.auth.onAuthStateChanged(user => {
+  this.Auth.onAuthStateChanged(user => {
       if (user) {
         succes(user);
       } else {
@@ -30,15 +31,15 @@ onAuthChanged(succes, error) {
   }
 
   signOut() {
-    this.auth.signOut();
+    this.Auth.signOut()
   }
 
   signIn(email, password) {
-    this.auth.signInWithEmailAndPassword(email, password);
+    this.Auth.signInWithEmailAndPassword(email, password)
   }
 
   createUser(email, password) {
-    this.auth.createUserWithEmailAndPassword(email, password);
+    this.Auth.createUserWithEmailAndPassword(email, password)
   }
 
   addObject(id, obj) {
@@ -48,23 +49,33 @@ onAuthChanged(succes, error) {
 
   async getObjects() {
     const userId = localStorage.getItem('userId');
+    
     try {
       const objectsList = await this.db.ref().child('users').child(userId).child('films').get();
       const parseObj = await objectsList.val();
-      return Object.values(parseObj);
+      
+      return parseObj ? Object.values(parseObj) : 'You dont have any movies in your library';
     } catch (error) {
       console.error(error);
     }
   }
 
   async getSorted(status = 'watched') {
+    spinner.show();
     const arrayFims = await this.getObjects()
+    spinner.hide();
+    if (typeof arrayFims === 'string') {
+      return arrayFims
+    }
     const sortFilms = arrayFims.filter(el => el.added === status);
     return sortFilms;
   }
 
   async getObject(id) {
-    const arrayObjects = await this.getObjects();
+    let arrayObjects = await this.getObjects();
+    if (typeof arrayObjects === 'string') {
+      arrayObjects = [];
+    }
     const object = arrayObjects.find(el => el.id === Number(id));
     return object;
   }

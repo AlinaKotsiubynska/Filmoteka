@@ -52,6 +52,6 @@ function closeModal() {
 
 function submitHandler(e) {
   e.preventDefault();
-  firebase.signIn(form['user-email'].value, form['user-password'].value)
+    firebase.signIn(form['user-email'].value, form['user-password'].value)
   closeModal()
 }

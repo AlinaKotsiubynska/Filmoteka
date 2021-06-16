@@ -11,10 +11,17 @@ class RenderData {
   async render(data) {
     try {
       const normalizeData = await this.getRenderData(data);
-      const markup = await this.temp(normalizeData);
-      this.containerRef.innerHTML = '';
-      this.containerRef.insertAdjacentHTML('beforeend', markup);
-      this.addEventListeners(normalizeData);
+      if (!normalizeData.length) {
+        this.containerRef.innerHTML = `Nothing found! 
+        Please check your request and try again!`;
+      } else {
+        const markup = await this.temp(normalizeData);
+        this.containerRef.innerHTML = '';
+        this.containerRef.insertAdjacentHTML('beforeend', markup);
+        this.addEventListeners(normalizeData);
+      }
+
+      
     } catch {}
   }
   async getRenderData(data) {
