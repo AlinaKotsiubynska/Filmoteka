@@ -153,7 +153,11 @@
     color: #ffffff;
   }
 }
-
+.active-btn {
+  border-color: transparent;
+  background-color: #ff6b01;
+  color: #ffffff;
+}
 .btn-add-watch {
   margin-right: 10px;
   // padding: 3px 8px;

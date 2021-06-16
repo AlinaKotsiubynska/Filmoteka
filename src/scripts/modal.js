@@ -15,11 +15,12 @@ async function getFilm(filmId) {
   const current = document.querySelector('.current');
   const page = current.href;
   let film = {};
-
+  const fetchFilm = await FetchFilms.getFilmById(filmId);
+  const firebaseFilm = await firebase.getObject(filmId);
   if (page.includes('index')) {
-    film = await FetchFilms.getFilmById(filmId);
+    film = fetchFilm;
   } else {
-    film = await firebase.getObject(filmId);
+    film = firebaseFilm;
   }
 
   const markup = modalTemp(film);
@@ -27,6 +28,9 @@ async function getFilm(filmId) {
   const modalWrapper = document.querySelector('.modal-wrapper');
   modalWrapper.innerHTML = '';
   modalWrapper.insertAdjacentHTML('beforeend', markup);
+  if (fetchFilm.id === firebaseFilm?.id) {
+    currentButtonChoice(firebaseFilm);
+  }
   modalWrapper.querySelector('.btn-add-watch').addEventListener('click', () => {
     onWatchBtnClick(film, filmId);
   });
@@ -97,8 +101,7 @@ function trailer(id) {
       const trailerYoutube = basicLightbox.create(`
 		<iframe width="560" height="315" src=${trailerUrl} frameborder="0" allowfullscreen></iframe>
   `);
-        trailerYoutube.show();
-      
+      trailerYoutube.show();
     } catch (error) {
       console.log(error);
     }
@@ -134,5 +137,20 @@ async function postData(filmId) {
   }
 
   return `https://www.youtube.com/embed/${trailerKey}`;
+}
+
+function currentButtonChoice({ added }) {
+  console.log(added);
+  const btnWatchRef = document.querySelector('.btn-add-watch');
+  const btnQueueRef = document.querySelector('.btn-add-queue');
+  if (added === 'watched') {
+    btnWatchRef.classList.add('active-btn');
+    btnWatchRef.textContent = 'added in watched';
+    btnWatchRef.disabled = true;
+  } else if (added === 'queue') {
+    btnQueueRef.classList.add('active-btn');
+    btnQueueRef.textContent = 'added in queue';
+    btnQueueRef.disabled = true;
+  }
 }
 export default onItemClick;

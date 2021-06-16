@@ -83,9 +83,8 @@
 }
 
 .btn:hover,
-.btn:focus {
-  color: #ffffff;
-  border-color: #ff6b01;
+.btn:focus,
+.current-btn {
   background-color: #ff6b01;
   box-shadow: (0px 8px 43px rgba(255, 107, 1, 0.6));
 }
