@@ -15,11 +15,12 @@ async function getFilm(filmId) {
   const current = document.querySelector('.current');
   const page = current.href;
   let film = {};
-
+  const fetchFilm = await FetchFilms.getFilmById(filmId);
+  const firebaseFilm = await firebase.getObject(filmId);
   if (page.includes('index')) {
-    film = await FetchFilms.getFilmById(filmId);
+    film = fetchFilm;
   } else {
-    film = await firebase.getObject(filmId);
+    film = firebaseFilm;
   }
 
   const markup = modalTemp(film);
@@ -27,7 +28,9 @@ async function getFilm(filmId) {
   const modalWrapper = document.querySelector('.modal-wrapper');
   modalWrapper.innerHTML = '';
   modalWrapper.insertAdjacentHTML('beforeend', markup);
-  currentButtonChoice(film);
+  if (fetchFilm.id === firebaseFilm?.id) {
+    currentButtonChoice(firebaseFilm);
+  }
   modalWrapper.querySelector('.btn-add-watch').addEventListener('click', () => {
     onWatchBtnClick(film, filmId);
   });
@@ -143,9 +146,11 @@ function currentButtonChoice({ added }) {
   if (added === 'watched') {
     btnWatchRef.classList.add('active-btn');
     btnWatchRef.textContent = 'added in watched';
+    btnWatchRef.disabled = true;
   } else if (added === 'queue') {
     btnQueueRef.classList.add('active-btn');
     btnQueueRef.textContent = 'added in queue';
+    btnQueueRef.disabled = true;
   }
 }
 export default onItemClick;
