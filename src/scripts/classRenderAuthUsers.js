@@ -5,6 +5,8 @@ import onItemClick from './modal';
 class RenderLibrary {
   constructor() {
     this.btnContainerRef = document.querySelector('.btn-container');
+    this.WatchedBtnRef = this.btnContainerRef.querySelector('.btn-watched');
+    this.QueueBtnRef = this.btnContainerRef.querySelector('.btn-queue');
     this.libGalleryRef = document.querySelector('.js-lib-gallery-container');
   }
   async render(label = 'watched') {
@@ -19,14 +21,19 @@ class RenderLibrary {
   onBtnsClick(event) {
     const label = event.target.id;
     this.render(label);
+    this.focusOnBtn(label);
   }
   succes() {
     this.btnContainerRef.addEventListener('click', e => {
       this.onBtnsClick(e);
     });
+    this.disabledBtn(false);
     this.render();
   }
   error() {
+    this.disabledBtn(true);
+    this.WatchedBtnRef.classList.remove('current-btn');
+    this.QueueBtnRef.classList.remove('current-btn');
     this.libGalleryRef.innerHTML = 'Please log in to access your library.';
   }
   addEventListeners() {
@@ -35,6 +42,19 @@ class RenderLibrary {
         onItemClick(event);
       }),
     );
+  }
+  focusOnBtn(label) {
+    if (label === 'watched') {
+      this.WatchedBtnRef.classList.add('current-btn');
+      this.QueueBtnRef.classList.remove('current-btn');
+      return;
+    }
+    this.QueueBtnRef.classList.add('current-btn');
+    this.WatchedBtnRef.classList.remove('current-btn');
+  }
+  disabledBtn(boolean) {
+    this.WatchedBtnRef.disabled = boolean;
+    this.QueueBtnRef.disabled = boolean;
   }
 }
 
