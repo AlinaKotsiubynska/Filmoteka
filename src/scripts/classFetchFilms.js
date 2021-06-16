@@ -49,9 +49,11 @@ class FilmsAPI {
     if (this.fetchBy !== 'trending') {
       this.fetchBy = 'trending';
     }
+    spinner.show();
     try {
       const response = await fetch(`${this.baseURL}/trending/movie/day?api_key=${this.key}&page=${page}`)
       this.updatePageNumb(page);
+      spinner.hide();
       const films = await response.json();
       return films
     } catch (error) {

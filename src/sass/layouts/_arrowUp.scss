@@ -1,0 +1,26 @@
+.arrow-up {
+  background-color: rgba(235, 225, 225, 0.405);
+  border: none;
+  border-radius: 50%;
+  color: black;
+  font-size: 40px;
+  width: 48px;
+  height: 48px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 0.5s ease;
+
+  &:hover {
+    background-color: #ff6b0177;
+    color: #ffffff;
+  }
+}
+
+.showBtn {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -20,10 +20,12 @@
   },
   "devDependencies": {
     "@popperjs/core": "^2.9.2",
+    "@splidejs/splide": "^2.4.21",
     "axios": "^0.21.1",
     "basiclightbox": "^5.0.4",
     "bootstrap": "^5.0.1",
     "debounce": "^1.2.1",
+    "firebase": "^8.6.7",
     "parcel-bundler": "^1.12.5",
     "parcel-plugin-handlebars-precompile": "^1.0.2",
     "parcel-plugin-nuke-dist": "^1.0.1",

@@ -49,7 +49,9 @@ function executeSearch(searchBy) {
 }
 
 const searchInput = document.querySelector('.search-input');
-searchInput.addEventListener('input', debounce(onSearch, 1000));
+if(searchInput) {
+  searchInput.addEventListener('input', debounce(onSearch, 1000));
+}
 
 const refPagination = document.querySelector('#pagination');
 refPagination.addEventListener('click', onPaginationClick);

@@ -1,0 +1,74 @@
+.menu-button {
+  position: absolute;
+  right: -45px;
+  top: -9px;
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  transition: fill 250ms cubic-bezier(0.77, 0, 0.175, 1);
+  fill: #ffffff;
+
+  &:focus,
+  &:hover {
+    fill: #ff6b08;
+  }
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+}
+
+.menu-button .icon-cross {
+  display: none;
+}
+
+.menu-button.is-open .icon-cross {
+  display: block;
+}
+
+.menu-button.is-open .icon-menu {
+  display: none;
+}
+
+.menu-container {
+  @media screen and (max-width: 767px) {
+    position: absolute;
+
+    display: none;
+    background-color: #f7f7f7;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 2px 4px rgba(0, 0, 0, 0.08), 0px 1px 3px rgba(0, 0, 0, 0.16);
+    color: #000000;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    padding: 30px 0;
+
+    z-index: 1;
+  }
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  &.is-open {
+    @media screen and (max-width: 767px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.menu-button.menu-library {
+  top: -9px;
+  right: -264px;
+}
+
+.menu-container.library {
+  top: 165%;
+}
