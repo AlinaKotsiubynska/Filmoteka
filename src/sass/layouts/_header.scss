@@ -1,4 +1,6 @@
 .header {
+  position: relative;
+
   min-height: 230px;
   padding-top: 25px;
   background-color: rgba(0, 0, 0, 0.56);
@@ -93,7 +95,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 60px;
+    // margin-bottom: 10px;
   }
 
   @media screen and (min-width: 768px) {
@@ -118,6 +120,11 @@
     &-link {
       position: relative;
 
+      @media screen and (max-width: 767px) {
+        display: block;
+        color: #000000;
+      }
+
       display: block;
       color: #ffffff;
       transition: color 250ms cubic-bezier(0.77, 0, 0.175, 1);
@@ -130,16 +137,29 @@
   }
 }
 
+.header-nav-list .header-nav-list-item {
+  @media screen and (max-width: 767px) {
+    margin-bottom: 10px;
+  }
+}
+
 .current::after {
   position: absolute;
-  top: 15px;
-  left: 0px;
+  top: 50px;
+  left: 137px;
+  width: 15%;
   content: '';
-
-  display: block;
-  width: 100%;
+  display: flex;
+  justify-content: center;
   height: 3px;
   background-color: #ff6b08;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    top: 15px;
+    left: 0px;
+    width: 100%;
+  }
 }
 
 .search {
@@ -241,7 +261,7 @@
 }
 
 .special {
-  display: none;
+  display: flex;
 
   @media screen and (min-width: 768px) {
     display: flex;

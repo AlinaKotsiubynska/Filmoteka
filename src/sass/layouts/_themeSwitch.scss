@@ -10,6 +10,14 @@ body.dark-theme {
   }
 }
 .theme-switch {
+  @media screen and (max-width: 767px) {
+    position: absolute;
+    top: 76%;
+    right: 142px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
   position: static;
   // margin-left: 30px;
 }
