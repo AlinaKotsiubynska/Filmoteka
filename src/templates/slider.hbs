@@ -1,0 +1,10 @@
+{{#each this}}
+<li class="splide__slide">
+    <picture>
+        <source srcset="{{#if backdrop_path}}https://image.tmdb.org/t/p/w500{{backdrop_path}}{{/if}}" type="image/jpg"
+            width="300" height="200">
+        <img src="https://picsum.photos/1300/600/?random" class="slider" alt="обложка фильма" width="300" height="200">
+    </picture>
+    {{!-- <img src="https://image.tmdb.org/t/p/w500{{backdrop_path}}" alt="xz" width="200" height="200"> --}}
+</li>
+{{/each}}

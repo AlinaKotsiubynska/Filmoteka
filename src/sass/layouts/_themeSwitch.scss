@@ -1,0 +1,42 @@
+body.light-theme {
+  background-color: #fff;
+}
+
+body.dark-theme {
+  background-color: #212121;
+
+  & .gallery-container {
+    color: rgba(103, 103, 103, 0.824);
+  }
+  & .gallery-card-title {
+    color: rgba(213, 213, 213, 0.824);
+  }
+}
+.theme-switch {
+  @media screen and (max-width: 767px) {
+    display: block;
+    position: absolute;
+    top: 2px;
+    right: 60px;
+  }
+
+  position: static;
+}
+
+.theme-switch__control {
+  width: 36px;
+  height: 18px;
+}
+
+.theme-switch__marker {
+  width: 15px;
+  height: 15px;
+  z-index: 0;
+}
+.theme-switch__toggle:checked ~ .theme-switch__marker {
+  transform: translateX(18px);
+}
+
+.theme-switch__track {
+  z-index: 0;
+}

@@ -1,44 +1,57 @@
-import Auth from './classAuth.js';
-const ClassAuth = new Auth();
+import firebase from './classFirebase.js'
 
 const loginBtn = document.getElementById('login');
-const header = document.querySelector('header');
-const authFotm = `<div id="modal-auth" class="backdrop">
-  <div class="auth-modal-container modal-container">
-    <form action="#" name="user-auth" class="auth-form">
-      <fieldset class="auth-form-inputs">
-        <label> Email
-          <input class="email" type="email" name="user-email" placeholder="Enter email">
-        </label>
-        <label> Password
-          <input class="password" type="text" name="user-password" placeholder="Enter password">
-        </label>
-      </fieldset>
-      <div>
-        <button type="submit">Submit</button>
-        <button type="button">Cancel</button>
-      </div>
-      
-    </form>
-  </div>`;
+const modalAuth = document.getElementById('modal-auth')
+const form = document.querySelector('.auth-form');
+const closeBtn = document.getElementById('auth-cancel')
 
-loginBtn.addEventListener('click', openAuthForm);
+firebase.onAuthChanged(setLocalId, setLocalId);
 
-function openAuthForm() {
-  header.insertAdjacentHTML('afterend', authFotm);
+form.addEventListener('submit', submitHandler);
 
-  document.querySelector('.auth-form').addEventListener('submit', submitHandler);
+closeBtn.addEventListener('click', closeModal);
+
+modalAuth.addEventListener('click', (e) => {
+  if(e.target === modalAuth) {
+  closeModal()
+    }
+})
+
+
+function setLocalId(user) {
+  if (user) {
+    localStorage.setItem('userId', user.uid);
+    setLogoutBtn()
+  } else {
+    localStorage.setItem('userId', user)
+    setLoginBtn()
+  }
 }
 
-function closeModal(e) {
-  e.currentTarget.remove();
+function setLoginBtn() {
+    loginBtn.addEventListener('click', openAuthForm);
+    loginBtn.removeEventListener('click', firebase.signOut.bind(firebase));
+    loginBtn.dataset.auth = 'login';
+    loginBtn.innerText = 'LOGIN'
+}
+  
+function setLogoutBtn() {
+    loginBtn.removeEventListener('click', openAuthForm);
+    loginBtn.addEventListener('click', firebase.signOut.bind(firebase));
+    loginBtn.dataset.auth = 'logout';
+    loginBtn.innerText = 'LOGOUT'
+  }
+
+function openAuthForm() {
+  modalAuth.classList.remove('is-hidden')
+}
+
+function closeModal() {
+  modalAuth.classList.add('is-hidden')
 }
 
 function submitHandler(e) {
   e.preventDefault();
-  const email = document.querySelector('.email').value;
-  const password = document.querySelector('.password').value;
-  ClassAuth.getToken(email, password);
-  const modalAuth = document.getElementById('modal-auth');
-  modalAuth.addEventListener('click', closeModal);
+    firebase.signIn(form['user-email'].value, form['user-password'].value)
+  closeModal()
 }

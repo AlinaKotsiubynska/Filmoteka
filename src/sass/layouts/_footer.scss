@@ -32,12 +32,11 @@ $pagination-hover-border-color: transparent;
   color: black;
 }
 .page-item:first-child .page-link {
-  background-color: #f7f7f7;
   color: black;
 }
-.page-item:first-child .page-link .active {
+.page-item:first-child.active .page-link {
   color: white;
-  background-color: red;
+  outline: yellow;
 }
 
 .footer {
@@ -78,5 +77,24 @@ $pagination-hover-border-color: transparent;
   .lisense-common {
     font-size: 16px;
     line-height: 1.187px;
+  }
+}
+
+.page-item.active .page-link {
+  z-index: 0;
+  border-color: $pagination-active-bg;
+}
+
+.page-item {
+  margin-right: 10px;
+}
+
+.out-of-range {
+  margin-right: 10px;
+
+  & > .page-link {
+    border-radius: 5px;
+
+    color: black;
   }
 }
