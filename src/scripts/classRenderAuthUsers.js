@@ -14,8 +14,14 @@ class RenderLibrary {
       const films = await Firebase.getSorted(label);
       const markup = libGalleryListTemp(films);
       this.libGalleryRef.innerHTML = '';
-      this.libGalleryRef.insertAdjacentHTML('afterbegin', markup);
-      this.addEventListeners();
+      if(!films.length) {
+        this.libGalleryRef.innerHTML = `You don't have any movies in ${label.toUpperCase()} yet`;
+      } else {
+        const markup = libGalleryListTemp(films);
+        this.libGalleryRef.innerHTML = '';
+        this.libGalleryRef.insertAdjacentHTML('afterbegin', markup);
+        this.addEventListeners();
+      }
     }
   }
   onBtnsClick(event) {
