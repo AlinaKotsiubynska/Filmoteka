@@ -26,8 +26,7 @@ async function getFilm(filmId) {
   const modalWrapper = document.querySelector('.modal-wrapper');
   modalWrapper.innerHTML = '';
   modalWrapper.insertAdjacentHTML('beforeend', markup);
-  const isValid = JSON.parse(localStorage.getItem('userId'));
-  if (isValid) {
+  if (localStorage.getItem('userId') !== 'null') {
     const fetchFilm = await FetchFilms.getFilmById(filmId);
     const firebaseFilm = await firebase.getObject(filmId);
     if (fetchFilm.id === firebaseFilm?.id) {
@@ -144,7 +143,6 @@ async function postData(filmId) {
 }
 
 function currentButtonChoice({ added }) {
-  console.log(added);
   const btnWatchRef = document.querySelector('.btn-add-watch');
   const btnQueueRef = document.querySelector('.btn-add-queue');
   if (added === 'watched') {
