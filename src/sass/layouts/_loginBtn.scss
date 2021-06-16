@@ -1,5 +1,17 @@
 .login-btn {
-  display: none;
+  @media screen and (max-width: 767px) {
+    position: absolute;
+    top: 10px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    text-transform: uppercase;
+    color: #000000;
+    border: none;
+    background-color: transparent;
+  }
 
   @media screen and (min-width: 768px) {
     display: flex;
