@@ -17,10 +17,11 @@ async function getFilm(filmId) {
   const page = current.href;
   let film = {};
   const fetchFilm = await FetchFilms.getFilmById(filmId);
-  const firebaseFilm = await firebase.getObject(filmId);
+  // const firebaseFilm = await firebase.getObject(filmId);
   if (page.includes('index')) {
     film = fetchFilm;
   } else {
+    const firebaseFilm = await firebase.getObject(filmId);
     film = firebaseFilm;
   }
 
