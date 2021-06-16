@@ -5,7 +5,7 @@
   padding-top: 25px;
   background-color: rgba(0, 0, 0, 0.56);
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-    url('../images/header/bghome-desk.jpg');
+    url('../images/header/bghome-mob.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -183,7 +183,7 @@
   margin: 0 auto;
 
   @media screen and (max-width: 767px) {
-    padding-top: 58px;
+    padding-top: 90px;
   }
 
   @media screen and (min-width: 768px) {
