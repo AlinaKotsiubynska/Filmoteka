@@ -1,28 +1,42 @@
 <header class="section header library">
-  <div class="container">
+  <div class="container wrapper">
     <nav class="header-nav">
-      <a class="header-nav-logo library" href="./index.html" aria-label="логотип сайта" lang="en">
-        <svg class="header-nav-logo-icon" width="24" height="24">
-          <use href="./images/icons/sprite.svg#icon-film"></use>
-        </svg>
-        <span class="header-nav-logo-text">Filmoteka</span>
-      </a>
+      <div class="header-nav-box">
+        <a class="header-nav-logo library" href="./index.html" aria-label="логотип сайта" lang="en">
+          <svg class="header-nav-logo-icon" width="24" height="24">
+            <use href="./images/icons/sprite.svg#icon-film"></use>
+          </svg>
+          <span class="header-nav-logo-text">Filmoteka</span>
+        </a>
 
-      <ul class="header-nav-list">
-        <li class="header-nav-list-item">
-          <a href="./index.html" class="header-nav-list-link">Home</a>
-        </li>
-        <li class="header-nav-list-item">
-          <a href="./library.html" class="current header-nav-list-link">My library</a>
-        </li>
-      </ul>
+        <button type="button" class="menu-button menu-library" aria-expanded="false" aria-controls="menu-container" data-menu-button>
+          <svg width="40" height="40" aria-label="Переключатель мобильного меню">
+            <use class="icon-cross" href="./images/icons/sprite.svg#icon-cross"></use>
+            <use class="icon-menu" href="./images/icons/sprite.svg#icon-menu"></use>
+          </svg>
+        </button>
+      </div>
     </nav>
-    <include src="./partials/loginButton.html"></include>
-    <include src="./partials/switchTheme.html"></include>
 
-    <div class="btn-container">
-      <button id="watched" type="button" class="btn btn-watched" autofocus>Watched</button>
-      <button id="queue" type="button" class="btn btn-queue">Queue</button>
+    <div class="special">
+      <div class="menu-container library" id="menu-container" data-menu>
+        <ul class="header-nav-list">
+          <li class="header-nav-list-item">
+            <a href="./index.html" class="header-nav-list-link">Home</a>
+          </li>
+          <li class="header-nav-list-item">
+            <a href="./library.html" class="current header-nav-list-link">My library</a>
+          </li>
+        </ul>
+
+        <include src="./partials/loginButtonLibrary.html"></include>
+      </div>
+      <include src="./partials/switchTheme.html"></include>
     </div>
+  </div>
+
+  <div class="btn-container">
+    <button id="watched" type="button" class="btn btn-watched">Watched</button>
+    <button id="queue" type="button" class="btn btn-queue">Queue</button>
   </div>
 </header>
