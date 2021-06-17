@@ -196,12 +196,6 @@
   }
 }
 
-.search-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .search-input {
   display: flex;
   background-color: transparent;
@@ -230,22 +224,15 @@
   }
 }
 
-.search-submit {
+.search-icon {
   position: absolute;
-  @media screen and (max-width: 767px) {
-    top: 88%;
-    right: -5px;
-  }
+  right: 2px;
+  bottom: 5px;
 
-  top: 45%;
-  right: -5px;
-  transform: translateY(-50%);
-
-  width: 21px;
-  height: 21px;
-  border: none;
+  display: flex;
+  width: 12px;
+  height: 12px;
   color: #ffffff;
-  background: url('../images/icons/search.svg') 50% no-repeat;
   cursor: pointer;
 
   &:hover,
