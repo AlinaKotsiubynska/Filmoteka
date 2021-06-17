@@ -1,10 +1,16 @@
+const { eventListeners } = require("@popperjs/core");
 
 const cards = document.querySelectorAll('.team-list-card');
 const refModalOpen = document.querySelector('.open-modal');
 
 for (let i = 0; i < cards.length; i++){
     const card = cards[i];
-    card.addEventListener('click', toRotate)
+    
+    if (window.visualViewport.width < 800) {
+        card.addEventListener('touchstart', toRotate)
+    } else {
+        card.addEventListener('click', toRotate)
+    }
 }
 
 function toRotate(evt) {
