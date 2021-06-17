@@ -64,8 +64,11 @@ onAuthChanged(succes, error) {
 
   async getSorted(status = 'watched') {
     const userId = localStorage.getItem('userId');
-    const sortFilms = (await (await this.db.ref().child('users').child(userId).child('films').orderByChild("added").equalTo(`${status}`).get()).val());
-    return Object.values(sortFilms);
+    const sortFilmsPromise = await this.db.ref().child('users').child(userId).child('films').orderByChild("added").equalTo(`${status}`).get();
+    const sortFilmsObj = sortFilmsPromise.val();
+    const sortFilmsArr = Object.values(sortFilmsObj);
+    return sortFilmsArr;
+    
   }
 
   async getObject(id) {
