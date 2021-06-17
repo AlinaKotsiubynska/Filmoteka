@@ -3,18 +3,28 @@ import FetchFilms from './classFetchFilms.js';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import firebase from './classFirebase.js';
+// import LibRender from './classRenderAuthUsers';
+// const galleryRender = new LibRender()
 
 const onItemClick = async event => {
   const id = event.currentTarget.dataset.id;
   await getFilm(id);
+  if (localStorage.getItem('userId') === 'null') {
+    disableButtons()
+  } else {
+    enebleButtons()
+  }
   openModal(id);
 };
 
-
+function getCurrentHref() {
+  const current = document.querySelector('.current');
+  return current.href;
+  
+}
 
 async function getFilm(filmId) {
-  const current = document.querySelector('.current');
-  const page = current.href;
+  const page = getCurrentHref();
   let film = {};
 
   if (page.includes('index')) {
@@ -115,6 +125,7 @@ function trailer(id) {
 }
 
 async function onWatchBtnClick(filmData, filmId) {
+  const page = getCurrentHref();
   const filterFilmData = {
     ...filmData,
     added: 'watched',
@@ -122,17 +133,40 @@ async function onWatchBtnClick(filmData, filmId) {
   };
 
   firebase.addObject(filmId, filterFilmData);
+  if (!page.includes('index')) {
+    // galleryRender.render('queue')
+    const currentFilm = document.querySelector('[data-id="'+filmId+'"]')
+    currentFilm.remove()
+    if (!document.querySelector('.gallery-list').innerHTML.trim()) {
+      document.querySelector('.gallery-list').innerHTML = `You don't have any movies in ${'queue'.toUpperCase()}`
+    }
+    // console.log(document.querySelector('.gallery-list').innerHTML);
+  }
+  
+  onCloseModal()
 }
 async function onQueueBtnClick(filmData, filmId) {
+  const page = getCurrentHref();
   const filterFilmData = {
     ...filmData,
     added: 'queue',
     trailer: await postData(filmId),
   };
+    if (!page.includes('index')) {
+    // galleryRender.render('watched')
+      const currentFilm = document.querySelector('[data-id="'+filmId+'"]')
+      currentFilm.remove()
+      if (!document.querySelector('.gallery-list').innerHTML.trim()) {
+      document.querySelector('.gallery-list').innerHTML = `You don't have any movies in ${'watched'.toUpperCase()}`
+    }
+      
+  }
   firebase.addObject(filmId, filterFilmData);
+  onCloseModal()
 }
 async function postData(filmId) {
   const response = await FetchFilms.getFilmTrailers(filmId);
+  console.log(response);
   let trailerKey = await response.results[0].key;
 
   if (filmId === '581726') {
@@ -157,5 +191,24 @@ function currentButtonChoice({ added }) {
     btnQueueRef.textContent = 'added in queue';
     btnQueueRef.disabled = true;
   }
+
+}
+
+function disableButtons() {
+  const btnWatchRef = document.querySelector('.btn-add-watch');
+  const btnQueueRef = document.querySelector('.btn-add-queue');
+  const message = document.querySelector('.unknown-user-message');
+  btnQueueRef.disabled = true;
+  btnWatchRef.disabled = true;
+  message.classList.remove('is-hidden')
+}
+
+function enebleButtons() {
+  const btnWatchRef = document.querySelector('.btn-add-watch');
+  const btnQueueRef = document.querySelector('.btn-add-queue');
+  const message = document.querySelector('.unknown-user-message');
+  btnQueueRef.disabled = false;
+  btnWatchRef.disabled = false;
+  message.classList.add('is-hidden')
 }
 export default onItemClick;

@@ -56,8 +56,7 @@ onAuthChanged(succes, error) {
     try {
       const objectsList = await this.db.ref().child('users').child(userId).child('films').get();
       const parseObj = await objectsList.val();
-      
-      return parseObj ? Object.values(parseObj) : 'You dont have any movies in your library';
+      return Object.values(parseObj)
     } catch (error) {
       console.error(error);
     }
@@ -68,9 +67,8 @@ onAuthChanged(succes, error) {
     const userId = localStorage.getItem('userId');
     const sortFilmsPromise = await this.db.ref().child('users').child(userId).child('films').orderByChild("added").equalTo(`${status}`).get();
     const sortFilmsObj = sortFilmsPromise.val();
-    const sortFilmsArr = Object.values(sortFilmsObj);
     spinner.hide();
-    return sortFilmsArr;
+    return sortFilmsObj ? Object.values(sortFilmsObj) : [];
   }
 
   async getObject(id) {
