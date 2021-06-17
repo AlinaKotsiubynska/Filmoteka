@@ -62,6 +62,5 @@ function submitHandler(e) {
   })
 
   closeModal()
-  
-
 }
+

@@ -5,6 +5,9 @@ body.light-theme {
 body.dark-theme {
   background-color: #212121;
 
+  & .gallery-container {
+    color: rgba(103, 103, 103, 0.824);
+  }
   & .gallery-card-title {
     color: rgba(213, 213, 213, 0.824);
   }

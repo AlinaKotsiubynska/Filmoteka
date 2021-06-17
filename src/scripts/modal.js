@@ -7,14 +7,16 @@ import firebase from './classFirebase.js';
 const onItemClick = async event => {
   const id = event.currentTarget.dataset.id;
   await getFilm(id);
-
   openModal(id);
 };
+
+
 
 async function getFilm(filmId) {
   const current = document.querySelector('.current');
   const page = current.href;
   let film = {};
+
   if (page.includes('index')) {
     film = await FetchFilms.getFilmById(filmId);
   } else {
@@ -26,6 +28,7 @@ async function getFilm(filmId) {
   const modalWrapper = document.querySelector('.modal-wrapper');
   modalWrapper.innerHTML = '';
   modalWrapper.insertAdjacentHTML('beforeend', markup);
+  
   if (localStorage.getItem('userId') !== 'null') {
     const fetchFilm = await FetchFilms.getFilmById(filmId);
     const firebaseFilm = await firebase.getObject(filmId);
