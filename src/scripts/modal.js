@@ -16,13 +16,11 @@ async function getFilm(filmId) {
   const current = document.querySelector('.current');
   const page = current.href;
   let film = {};
-  const fetchFilm = await FetchFilms.getFilmById(filmId);
-  // const firebaseFilm = await firebase.getObject(filmId);
+
   if (page.includes('index')) {
-    film = fetchFilm;
+    film = await FetchFilms.getFilmById(filmId);
   } else {
-    const firebaseFilm = await firebase.getObject(filmId);
-    film = firebaseFilm;
+    film = await firebase.getObject(filmId);
   }
 
   const markup = modalTemp(film);
@@ -30,9 +28,15 @@ async function getFilm(filmId) {
   const modalWrapper = document.querySelector('.modal-wrapper');
   modalWrapper.innerHTML = '';
   modalWrapper.insertAdjacentHTML('beforeend', markup);
-  // if (fetchFilm.id === firebaseFilm?.id) {
-  //   currentButtonChoice(firebaseFilm);
-  // }
+  
+  if (localStorage.getItem('userId') !== 'null') {
+    const fetchFilm = await FetchFilms.getFilmById(filmId);
+    const firebaseFilm = await firebase.getObject(filmId);
+    if (fetchFilm.id === firebaseFilm?.id) {
+      currentButtonChoice(firebaseFilm);
+    }
+  }
+
   modalWrapper.querySelector('.btn-add-watch').addEventListener('click', () => {
     onWatchBtnClick(film, filmId);
   });

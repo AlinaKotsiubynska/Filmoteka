@@ -52,6 +52,15 @@ function closeModal() {
 
 function submitHandler(e) {
   e.preventDefault();
-    firebase.signIn(form['user-email'].value, form['user-password'].value)
+  const email = form['user-email'].value;
+  const password = form['user-password'].value
+  firebase.signIn(email, password).catch(error => {
+    console.log(error.code)
+    if ('auth/user-not-found') {
+      firebase.createUser(email,password)
+    }
+  })
+
   closeModal()
 }
+

@@ -31,15 +31,18 @@ onAuthChanged(succes, error) {
   }
 
   signOut() {
-    this.Auth.signOut()
+    this.Auth.signOut();
   }
 
   signIn(email, password) {
-    this.Auth.signInWithEmailAndPassword(email, password)
+    return this.Auth.signInWithEmailAndPassword(email, password)
   }
 
-  createUser(email, password) {
-    this.Auth.createUserWithEmailAndPassword(email, password)
+  async createUser(email, password) {
+    const newUser = await this.Auth.createUserWithEmailAndPassword(email, password);
+    const userEmail = newUser.user.email;
+    const userId = newUser.user.uid;
+    this.db.ref(`users/${userId}`).set({ email: userEmail, films: { 0: 'empty'}})
   }
 
   addObject(id, obj) {
@@ -62,13 +65,12 @@ onAuthChanged(succes, error) {
 
   async getSorted(status = 'watched') {
     spinner.show();
-    const arrayFims = await this.getObjects()
+    const userId = localStorage.getItem('userId');
+    const sortFilmsPromise = await this.db.ref().child('users').child(userId).child('films').orderByChild("added").equalTo(`${status}`).get();
+    const sortFilmsObj = sortFilmsPromise.val();
+    const sortFilmsArr = Object.values(sortFilmsObj);
     spinner.hide();
-    if (typeof arrayFims === 'string') {
-      return arrayFims
-    }
-    const sortFilms = arrayFims.filter(el => el.added === status);
-    return sortFilms;
+    return sortFilmsArr;
   }
 
   async getObject(id) {
