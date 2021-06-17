@@ -15,12 +15,12 @@ const firebaseConfig = {
 class Firebase {
   constructor(config) {
     firebase.initializeApp(config);
-    this.auth = firebase.auth();
+    this.Auth = firebase.auth();
     this.db = firebase.database();
   }
 
 onAuthChanged(succes, error) {
-  this.auth.onAuthStateChanged(user => {
+  this.Auth.onAuthStateChanged(user => {
       if (user) {
         succes(user);
       } else {
@@ -30,15 +30,20 @@ onAuthChanged(succes, error) {
   }
 
   signOut() {
-    this.auth.signOut();
+    this.Auth.signOut();
   }
 
   signIn(email, password) {
-    this.auth.signInWithEmailAndPassword(email, password);
+    return this.Auth.signInWithEmailAndPassword(email, password)
+    
   }
 
-  createUser(email, password) {
-    this.auth.createUserWithEmailAndPassword(email, password);
+  async createUser(email, password) {
+    const newUser = await this.Auth.createUserWithEmailAndPassword(email, password);
+    const userEmail = newUser.user.email;
+    const userId = newUser.user.uid;
+    console.log( newUser ,newUser.user);
+    this.db.ref(`users/${userId}`).set({ email: userEmail, films: { 0: 'empty'} })
   }
 
   addObject(id, obj) {
@@ -58,9 +63,9 @@ onAuthChanged(succes, error) {
   }
 
   async getSorted(status = 'watched') {
-    const arrayFims = await this.getObjects()
-    const sortFilms = arrayFims.filter(el => el.added === status);
-    return sortFilms;
+    const userId = localStorage.getItem('userId');
+    const sortFilms = (await (await this.db.ref().child('users').child(userId).child('films').orderByChild("added").equalTo(`${status}`).get()).val());
+    return Object.values(sortFilms);
   }
 
   async getObject(id) {
