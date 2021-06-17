@@ -20,8 +20,8 @@ class Firebase {
     this.db = firebase.database();
   }
 
-onAuthChanged(succes, error) {
-  this.Auth.onAuthStateChanged(user => {
+  onAuthChanged(succes, error) {
+    this.Auth.onAuthStateChanged(user => {
       if (user) {
         succes(user);
       } else {
@@ -35,14 +35,14 @@ onAuthChanged(succes, error) {
   }
 
   signIn(email, password) {
-    return this.Auth.signInWithEmailAndPassword(email, password)
+    return this.Auth.signInWithEmailAndPassword(email, password);
   }
 
   async createUser(email, password) {
     const newUser = await this.Auth.createUserWithEmailAndPassword(email, password);
     const userEmail = newUser.user.email;
     const userId = newUser.user.uid;
-    this.db.ref(`users/${userId}`).set({ email: userEmail, films: { 0: 'empty'}})
+    this.db.ref(`users/${userId}`).set({ email: userEmail, films: { 0: 'empty' } });
   }
 
   addObject(id, obj) {
@@ -52,11 +52,11 @@ onAuthChanged(succes, error) {
 
   async getObjects() {
     const userId = localStorage.getItem('userId');
-    
+
     try {
       const objectsList = await this.db.ref().child('users').child(userId).child('films').get();
       const parseObj = await objectsList.val();
-      
+
       return parseObj ? Object.values(parseObj) : 'You dont have any movies in your library';
     } catch (error) {
       console.error(error);
@@ -66,7 +66,16 @@ onAuthChanged(succes, error) {
   async getSorted(status = 'watched') {
     spinner.show();
     const userId = localStorage.getItem('userId');
-    const sortFilmsPromise = await this.db.ref().child('users').child(userId).child('films').orderByChild("added").equalTo(`${status}`).get();
+    const sortFilmsPromise = await this.db
+      .ref()
+      .child('users')
+      .child(userId)
+      .child('films')
+      .orderByChild('added')
+      .equalTo(`${status}`)
+      .get();
+
+    console.log(sortFilmsPromise.val());
     const sortFilmsObj = sortFilmsPromise.val();
     const sortFilmsArr = Object.values(sortFilmsObj);
     spinner.hide();

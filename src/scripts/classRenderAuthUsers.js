@@ -1,6 +1,7 @@
 import libGalleryListTemp from '../templates/lib-gallery.hbs';
 import Firebase from './classFirebase.js';
 import onItemClick from './modal';
+import renderPagination from './renderPagination.js';
 
 class RenderLibrary {
   constructor() {
@@ -14,18 +15,45 @@ class RenderLibrary {
       const films = await Firebase.getSorted(label);
       const markup = libGalleryListTemp(films);
       this.libGalleryRef.innerHTML = '';
-      if(typeof films === 'string') {
+      if (typeof films === 'string') {
         this.libGalleryRef.innerHTML = `${films}`;
-      } else if(!films.length) {
+      } else if (!films.length) {
         this.libGalleryRef.innerHTML = `You don't have any movies in ${label.toUpperCase()} yet`;
       } else {
-        const markup = libGalleryListTemp(films);
-        this.libGalleryRef.innerHTML = '';
-        this.libGalleryRef.insertAdjacentHTML('afterbegin', markup);
-        this.addEventListeners();
+        this.allFilms = films;
+
+        this.renderPage(1);
       }
     }
   }
+
+  renderPage(pageNumber) {
+    let indexFrom = pageNumber - 1 + 6 * (pageNumber - 1);
+    if (pageNumber > 1) {
+      indexFrom -= pageNumber - 1;
+    }
+    const indexTo = pageNumber * 6;
+    const films = this.allFilms.slice(indexFrom, indexTo);
+
+    const markup = libGalleryListTemp(films);
+    this.libGalleryRef.innerHTML = '';
+    this.libGalleryRef.insertAdjacentHTML('afterbegin', markup);
+    this.addEventListeners();
+
+    const totalPages = Math.ceil(this.allFilms.length / 6);
+
+    renderPagination({
+      total_pages: totalPages,
+      page: pageNumber,
+    });
+  }
+
+  onPaginationClick(e) {
+    const pageNumber = e.target.dataset.navigation;
+
+    this.renderPage(Number(pageNumber));
+  }
+
   onBtnsClick(event) {
     const label = event.target.id;
     this.render(label);
@@ -50,6 +78,9 @@ class RenderLibrary {
         onItemClick(event);
       }),
     );
+
+    const refPagination = document.querySelector('#pagination');
+    refPagination.addEventListener('click', this.onPaginationClick.bind(this));
   }
   focusOnBtn(label) {
     if (label === 'watched') {
