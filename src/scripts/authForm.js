@@ -48,6 +48,7 @@ function openAuthForm() {
 
 function closeModal() {
   modalAuth.classList.add('is-hidden')
+  form.reset()
 }
 
 function submitHandler(e) {
