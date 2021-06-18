@@ -1,7 +1,6 @@
 import libGalleryListTemp from '../templates/lib-gallery.hbs';
 import Firebase from './classFirebase.js';
 import onItemClick from './modal';
-
 class RenderLibrary {
   constructor() {
     this.btnContainerRef = document.querySelector('.btn-container');
@@ -17,7 +16,7 @@ class RenderLibrary {
       if(typeof films === 'string') {
         this.libGalleryRef.innerHTML = `${films}`;
       } else if(!films.length) {
-        this.libGalleryRef.innerHTML = `You don't have any movies in ${label.toUpperCase()} yet`;
+        this.libGalleryRef.innerHTML = `You don't have any movies in ${label.toUpperCase()}`;
       } else {
         const markup = libGalleryListTemp(films);
         this.libGalleryRef.innerHTML = '';
@@ -71,3 +70,5 @@ const succes = RenderLib.succes.bind(RenderLib);
 const error = RenderLib.error.bind(RenderLib);
 
 Firebase.onAuthChanged(succes, error);
+
+export default RenderLibrary;
