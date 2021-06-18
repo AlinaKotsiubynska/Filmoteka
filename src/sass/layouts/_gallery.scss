@@ -16,7 +16,7 @@
   height: auto;
 }
 .gallery-card-info {
-  padding: 10px 0 0 1px;
+  padding: 10px;
 }
 .gallery-card-title {
   margin-bottom: 5px;
@@ -52,7 +52,7 @@
   cursor: pointer;
   padding-bottom: 5px;
   &:hover {
-    box-shadow: 2px 5px 16px 0px #e8742788;
+    box-shadow: 0px 0px 10px 1px rgb(232 116 39 / 53%), 0px 0px 20px 1px rgb(232 116 39 / 23%);
   }
 }
 @media screen and (min-width: 768px) {
