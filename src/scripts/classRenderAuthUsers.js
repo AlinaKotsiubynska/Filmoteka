@@ -17,8 +17,8 @@ class RenderLibrary {
       this.libGalleryRef.innerHTML = '';
       if (typeof films === 'string') {
         this.libGalleryRef.innerHTML = `${films}`;
-      } else if (!films.length) {
-        this.libGalleryRef.innerHTML = `You don't have any movies in ${label.toUpperCase()} yet`;
+      } else if(!films.length) {
+        this.libGalleryRef.innerHTML = `You don't have any movies in ${label.toUpperCase()}`;
       } else {
         this.allFilms = films;
 
@@ -28,11 +28,11 @@ class RenderLibrary {
   }
 
   renderPage(pageNumber) {
-    let indexFrom = pageNumber - 1 + 6 * (pageNumber - 1);
+    let indexFrom = pageNumber - 1 + 12 * (pageNumber - 1);
     if (pageNumber > 1) {
       indexFrom -= pageNumber - 1;
     }
-    const indexTo = pageNumber * 6;
+    const indexTo = pageNumber * 12;
     const films = this.allFilms.slice(indexFrom, indexTo);
 
     const markup = libGalleryListTemp(films);
@@ -40,7 +40,7 @@ class RenderLibrary {
     this.libGalleryRef.insertAdjacentHTML('afterbegin', markup);
     this.addEventListeners();
 
-    const totalPages = Math.ceil(this.allFilms.length / 6);
+    const totalPages = Math.ceil(this.allFilms.length / 12);
 
     renderPagination({
       total_pages: totalPages,
@@ -102,3 +102,5 @@ const succes = RenderLib.succes.bind(RenderLib);
 const error = RenderLib.error.bind(RenderLib);
 
 Firebase.onAuthChanged(succes, error);
+
+export default RenderLibrary;
