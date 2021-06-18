@@ -45,10 +45,15 @@
   }
 }
 .gallery-card-item {
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
+  padding-bottom: 5px;
+  &:hover {
+    box-shadow: 2px 5px 16px 0px #e8742788;
+  }
 }
 @media screen and (min-width: 768px) {
   .gallery-container {
