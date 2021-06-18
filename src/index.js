@@ -9,4 +9,4 @@ import './scripts/authForm.js';
 import './scripts/switchTheme.js';
 import './scripts/arrowUp.js';
 import './scripts/menu.js';
-import './scripts/searchBtn';
+// import './scripts/searchBtn';
