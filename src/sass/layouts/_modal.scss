@@ -130,6 +130,11 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 20px;
+
+  &.unknown-user-message {
+    margin-top: 20px;
+    color: #8c8c8c;
+  }
 }
 
 .modal-button {
@@ -151,6 +156,12 @@
     border-color: transparent;
     background-color: #ff6b01;
     color: #ffffff;
+  }
+
+  &:disabled {
+    background-color: #ffffff;
+    color: #0000003d;
+    border: 1px solid #0000003d;
   }
 }
 .active-btn {
