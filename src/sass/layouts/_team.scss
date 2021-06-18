@@ -119,9 +119,11 @@ ul {
 .modal-footer .btn {
   color: black;
   border: 1px solid black;
+  background-color: white;
 }
 .modal-footer .btn:hover,
 .modal-footer .btn:focus {
   color: white;
   border: 1px solid white;
+  background-color: orange;
 }

@@ -48,7 +48,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  // align-items: flex-start;
+  cursor: pointer;
 }
 @media screen and (min-width: 768px) {
   .gallery-container {

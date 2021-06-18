@@ -20,8 +20,8 @@ class Firebase {
     this.db = firebase.database();
   }
 
-onAuthChanged(succes, error) {
-  this.Auth.onAuthStateChanged(user => {
+  onAuthChanged(succes, error) {
+    this.Auth.onAuthStateChanged(user => {
       if (user) {
         succes(user);
       } else {
@@ -31,15 +31,18 @@ onAuthChanged(succes, error) {
   }
 
   signOut() {
-    this.Auth.signOut()
+    this.Auth.signOut();
   }
 
   signIn(email, password) {
-    this.Auth.signInWithEmailAndPassword(email, password)
+    return this.Auth.signInWithEmailAndPassword(email, password);
   }
 
-  createUser(email, password) {
-    this.Auth.createUserWithEmailAndPassword(email, password)
+  async createUser(email, password) {
+    const newUser = await this.Auth.createUserWithEmailAndPassword(email, password);
+    const userEmail = newUser.user.email;
+    const userId = newUser.user.uid;
+    this.db.ref(`users/${userId}`).set({ email: userEmail, films: { 0: 'empty' } });
   }
 
   addObject(id, obj) {
@@ -49,12 +52,11 @@ onAuthChanged(succes, error) {
 
   async getObjects() {
     const userId = localStorage.getItem('userId');
-    
+
     try {
       const objectsList = await this.db.ref().child('users').child(userId).child('films').get();
       const parseObj = await objectsList.val();
-      
-      return parseObj ? Object.values(parseObj) : 'You dont have any movies in your library';
+      return Object.values(parseObj)
     } catch (error) {
       console.error(error);
     }
@@ -62,13 +64,18 @@ onAuthChanged(succes, error) {
 
   async getSorted(status = 'watched') {
     spinner.show();
-    const arrayFims = await this.getObjects()
+    const userId = localStorage.getItem('userId');
+    const sortFilmsPromise = await this.db
+      .ref()
+      .child('users')
+      .child(userId)
+      .child('films')
+      .orderByChild('added')
+      .equalTo(`${status}`)
+      .get();
+    const sortFilmsObj = sortFilmsPromise.val();
     spinner.hide();
-    if (typeof arrayFims === 'string') {
-      return arrayFims
-    }
-    const sortFilms = arrayFims.filter(el => el.added === status);
-    return sortFilms;
+    return sortFilmsObj ? Object.values(sortFilmsObj) : [];
   }
 
   async getObject(id) {
