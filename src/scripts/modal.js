@@ -166,7 +166,6 @@ async function onQueueBtnClick(filmData, filmId) {
 }
 async function postData(filmId) {
   const response = await FetchFilms.getFilmTrailers(filmId);
-  console.log(response);
   let trailerKey = await response.results[0].key;
 
   if (filmId === '581726') {
